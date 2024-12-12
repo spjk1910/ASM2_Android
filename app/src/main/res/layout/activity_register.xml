@@ -8,7 +8,7 @@
     android:orientation="vertical"
     android:gravity="center"
     android:background="@drawable/register_bg"
-    tools:context=".Sign_In_Activity">
+    tools:context=".View.RegisterActivity">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -44,7 +44,8 @@
                 android:drawablePadding="8dp"
                 android:layout_marginTop="40dp"
                 android:hint="Your Name"
-                android:textColor="@color/black"/>
+                android:textColor="@color/black"
+                android:textColorHint="@color/grey"/>
 
             <EditText
                 android:layout_width="match_parent"
@@ -56,7 +57,8 @@
                 android:drawablePadding="8dp"
                 android:layout_marginTop="20dp"
                 android:hint="Email"
-                android:textColor="@color/black"/>
+                android:textColor="@color/black"
+                android:textColorHint="@color/grey"/>
 
             <EditText
                 android:layout_width="match_parent"
@@ -68,7 +70,8 @@
                 android:drawablePadding="8dp"
                 android:layout_marginTop="20dp"
                 android:hint="Username"
-                android:textColor="@color/black"/>
+                android:textColor="@color/black"
+                android:textColorHint="@color/grey"/>
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -81,10 +84,11 @@
                     android:layout_height="match_parent"
                     android:background="@drawable/register_border"
                     android:padding="8dp"
-                    android:drawableStart="@drawable/ic_password"
+                    android:drawableStart="@drawable/ic_lock"
                     android:drawablePadding="8dp"
                     android:hint="Password"
                     android:textColor="@color/black"
+                    android:textColorHint="@color/grey"
                     android:inputType="textPassword"/>
 
                 <ImageView
@@ -93,7 +97,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
-                    android:layout_marginEnd="15dp"
+                    android:layout_marginEnd="30dp"
                     android:src="@drawable/ic_eye_closed"/>
             </RelativeLayout>
 
@@ -118,7 +122,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Already have an account? "
+                    android:text="Already have account? "
                     android:textSize="18sp"
                     android:textColor="@color/black"/>
 
