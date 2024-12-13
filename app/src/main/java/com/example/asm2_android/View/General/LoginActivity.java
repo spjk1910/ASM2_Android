@@ -1,9 +1,9 @@
-package com.example.asm2_android.View;
+package com.example.asm2_android.View.General;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
-import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,9 +15,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.asm2_android.R;
 
+import com.example.asm2_android.View.Donor.DonorHomeActivity;
+import com.example.asm2_android.View.SiteManager.SiteManagerHomeActivity;
+import com.example.asm2_android.View.SuperUser.SuperUserHomeActivity;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.Objects;
 
 public class LoginActivity extends AppCompatActivity {
     private EditText loginUsername, loginPassword;
@@ -30,6 +35,15 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        Objects.requireNonNull(getSupportActionBar()).hide();
+        getWindow().getDecorView().setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                        | View.SYSTEM_UI_FLAG_FULLSCREEN
+                        | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                        | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+        );
 
         passwordVisibility = findViewById(R.id.password_visibility);
         signInButton = findViewById(R.id.sign_in_button);
@@ -52,6 +66,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
+                finish();
             }
         });
 
@@ -111,10 +126,13 @@ public class LoginActivity extends AppCompatActivity {
                             String dbPassword = document.getString("password");
 
                             if (dbPassword != null && dbPassword.equals(password)) {
-                                // Successfully logged in
+                                String role = document.getString("role");
                                 Toast.makeText(LoginActivity.this, "Login Successful!", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(LoginActivity.this, DonorHomeActivity.class);
-                                startActivity(intent);
+                                if (role != null) {
+                                    showLoadingScreen(getHomeActivityClass(role));
+                                } else {
+                                    Toast.makeText(LoginActivity.this, "Role not defined for user!", Toast.LENGTH_SHORT).show();
+                                }
                             } else {
                                 loginPassword.setError("Incorrect password!");
                                 loginPassword.requestFocus();
@@ -131,9 +149,13 @@ public class LoginActivity extends AppCompatActivity {
                                                 String dbPassword2 = document2.getString("password");
 
                                                 if (dbPassword2 != null && dbPassword2.equals(password)) {
+                                                    String role = document2.getString("role");
                                                     Toast.makeText(LoginActivity.this, "Login Successful!", Toast.LENGTH_SHORT).show();
-                                                    Intent intent = new Intent(LoginActivity.this, DonorHomeActivity.class);
-                                                    startActivity(intent);
+                                                    if (role != null) {
+                                                        showLoadingScreen(getHomeActivityClass(role));
+                                                    } else {
+                                                        Toast.makeText(LoginActivity.this, "Role not defined for user!", Toast.LENGTH_SHORT).show();
+                                                    }
                                                 } else {
                                                     loginPassword.setError("Incorrect password!");
                                                     loginPassword.requestFocus();
@@ -151,5 +173,40 @@ public class LoginActivity extends AppCompatActivity {
                         Toast.makeText(LoginActivity.this, "Database error: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
+    }
+
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        if (hasFocus) {
+            getWindow().getDecorView().setSystemUiVisibility(
+                    View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                            | View.SYSTEM_UI_FLAG_FULLSCREEN
+                            | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                            | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                            | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                            | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+            );
+        }
+    }
+
+    private Class<?> getHomeActivityClass(String role) {
+        switch (role) {
+            case "DONORS":
+                return DonorHomeActivity.class;
+            case "SITE_MANAGERS":
+                return SiteManagerHomeActivity.class;
+            case "SUPER_USERS":
+                return SuperUserHomeActivity.class;
+            default:
+                Toast.makeText(LoginActivity.this, "Invalid role!", Toast.LENGTH_SHORT).show();
+                return null;
+        }
+    }
+
+    private void showLoadingScreen(Class<?> targetActivity) {
+        Intent intent = new Intent(LoginActivity.this, LoadingScreenActivity.class);
+        intent.putExtra("ACTIVITY_NAME", targetActivity.getName());
+        startActivity(intent);
     }
 }

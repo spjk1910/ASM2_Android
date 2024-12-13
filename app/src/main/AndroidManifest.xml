@@ -12,21 +12,34 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ASM2_Android"
         tools:targetApi="31">
+
         <activity
-            android:name=".View.DonorHomeActivity"
-            android:exported="false" />
-        <activity
-            android:name=".View.RegisterActivity"
-            android:exported="false" />
-        <activity
-            android:name=".View.LoginActivity"
+            android:name=".View.General.SplashScreenActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".View.General.LoadingScreenActivity"
+            android:exported="false" />
+        <activity
+            android:name=".View.SuperUser.SuperUserHomeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".View.SiteManager.SiteManagerHomeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".View.Donor.DonorHomeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".View.General.RegisterActivity"
+            android:exported="false" />
+        <activity
+            android:name=".View.General.LoginActivity"
+            android:exported="true" />
     </application>
 
 </manifest>
