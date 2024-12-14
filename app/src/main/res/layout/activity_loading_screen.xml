@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/progress_bar"
         android:layout_alignParentBottom="true"
-        android:indeterminateTint="#FF0000"
+        android:indeterminateTint="@color/red"
         android:layout_marginBottom="100dp"/>
 
 </RelativeLayout>

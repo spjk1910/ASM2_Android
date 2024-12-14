@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:width="360dp"
+    android:height="200dp"
+    android:viewportWidth="360"
+    android:viewportHeight="200"
+    tools:ignore="VectorRaster">
+
+    <path
+        android:fillColor="@color/blood_orange"
+        android:pathData="M0,0 L360,0 L360,100 Q180,200 0,100 Z" />
+</vector>

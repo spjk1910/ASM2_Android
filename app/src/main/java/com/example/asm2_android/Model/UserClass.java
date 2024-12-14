@@ -1,5 +1,7 @@
 package com.example.asm2_android.Model;
 
+import java.util.Date;
+
 public class UserClass {
     private String name;
     private String email;
@@ -10,9 +12,10 @@ public class UserClass {
     private BloodEnum bloodType;
     private UserRoleEnum role;
     private String profileImage;
+    private Date birthday;
 
     public UserClass(String name, String email, String username, String password, String phoneNumber,
-                     String address, BloodEnum bloodType, UserRoleEnum role,String profileImage) {
+                     String address, BloodEnum bloodType, UserRoleEnum role,String profileImage,Date birthday) {
         this.name = name;
         this.email = email;
         this.username = username;
@@ -22,6 +25,15 @@ public class UserClass {
         this.bloodType = bloodType;
         this.role = role;
         this.profileImage = profileImage;
+        this.birthday = birthday;
+    }
+
+    public Date getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
     }
 
     public String getProfileImage() {
