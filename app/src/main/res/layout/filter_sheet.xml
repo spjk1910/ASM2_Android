@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="20dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        android:background="@color/vibrant_pink">
+
+        <ImageView
+            android:id="@+id/close_filter"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/ic_close"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"/>
+
+        <TextView
+            android:id="@+id/filter_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Filter"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/filter_title"
+            android:layout_marginLeft="20dp"
+            android:text="Blood Type"
+            android:textSize="24sp"
+            android:textStyle="normal"
+            android:textColor="@color/black"/>
+
+        <GridLayout
+            android:id="@+id/blood_type_grid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/filter_title"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="5dp"
+            android:columnCount="4"
+            android:padding="10dp">
+
+            <CheckBox
+                android:id="@+id/checkbox_A_plus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="A+"
+                android:textSize="20sp"
+                android:textStyle="normal"
+                android:textColor="@color/black"
+                android:buttonTint="@color/black"
+                android:layout_row="0"
+                android:layout_column="0" />
+
+            <CheckBox
+                android:id="@+id/checkbox_A_minus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="A-"
+                android:buttonTint="@color/black"
+                android:textSize="20sp"
+                android:textStyle="normal"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/black"
+                android:layout_row="0"
+                android:layout_column="1" />
+
+            <CheckBox
+                android:id="@+id/checkbox_B_plus"
+                android:buttonTint="@color/black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="B+"
+                android:textSize="20sp"
+                android:textStyle="normal"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/black"
+                android:layout_row="0"
+                android:layout_column="2" />
+
+            <CheckBox
+                android:id="@+id/checkbox_B_minus"
+                android:buttonTint="@color/black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="B-"
+                android:textSize="20sp"
+                android:textStyle="normal"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/black"
+                android:layout_row="0"
+                android:layout_column="3" />
+
+            <CheckBox
+                android:id="@+id/checkbox_O_plus"
+                android:buttonTint="@color/black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="O+"
+                android:textSize="20sp"
+                android:textStyle="normal"
+                android:textColor="@color/black"
+                android:layout_row="1"
+                android:layout_column="0" />
+
+            <CheckBox
+                android:buttonTint="@color/black"
+                android:id="@+id/checkbox_O_minus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="O-"
+                android:textSize="20sp"
+                android:textStyle="normal"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/black"
+                android:layout_row="1"
+                android:layout_column="1" />
+
+            <CheckBox
+                android:id="@+id/checkbox_AB_plus"
+                android:buttonTint="@color/black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="AB+"
+                android:textSize="20sp"
+                android:textStyle="normal"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/black"
+                android:layout_row="1"
+                android:layout_column="2" />
+
+            <CheckBox
+                android:id="@+id/checkbox_AB_minus"
+                android:buttonTint="@color/black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="AB-"
+                android:textSize="20sp"
+                android:textStyle="normal"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/black"
+                android:layout_row="1"
+                android:layout_column="3" />
+        </GridLayout>
+
+        <TextView
+            android:id="@+id/date_of_event_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/blood_type_grid"
+            android:layout_marginLeft="20dp"
+            android:text="Date of event"
+            android:textSize="24sp"
+            android:textStyle="normal"
+            android:textColor="@color/black"/>
+
+        <TextView
+            android:id="@+id/date_of_event"
+            android:layout_width="350dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/date_of_event_title"
+            android:drawableStart="@drawable/ic_calendar"
+            android:layout_marginLeft="20dp"
+            android:hint="Select Date"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:textColorHighlight="@color/black"
+            android:padding="10dp"
+            android:background="@drawable/search_bg"
+           />
+
+        <Button
+            android:id="@+id/sign_in_button"
+            android:layout_below="@id/date_of_event"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Save"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            app:backgroundTint="@color/bubble_gum"
+            app:cornerRadius="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"/>
+
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

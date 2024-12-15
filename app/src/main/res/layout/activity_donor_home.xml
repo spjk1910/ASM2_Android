@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -11,19 +10,48 @@
         android:id="@+id/map"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        app:mapbox_cameraBearing="0.0"
+        app:mapbox_cameraPitch="0.0"
         app:mapbox_cameraTargetLat="39.5"
         app:mapbox_cameraTargetLng="-98.0"
         app:mapbox_cameraZoom="2.0"
-        app:mapbox_cameraPitch="0.0"
-        app:mapbox_cameraBearing="0.0"
-        app:mapbox_styleUri="mapbox://styles/mapbox/streets-v11"/>
+        app:mapbox_styleUri="mapbox://styles/mapbox/streets-v11" />
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Map"
-        android:textSize="36sp"
-        android:layout_centerInParent="true"/>
+        android:orientation="horizontal"
+        android:padding="10dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@android:color/transparent"
+        android:elevation="4dp">
+
+        <EditText
+            android:id="@+id/search"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:iconifiedByDefault="false"
+            android:background="@drawable/search_bg"
+            android:drawableStart="@drawable/ic_search"
+            android:hint="Searching..."
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
+            android:padding="8dp"
+            android:elevation="4dp" />
+
+        <ImageView
+            android:id="@+id/filter"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="8dp"
+            android:src="@drawable/ic_filter"
+            android:padding="8dp"
+            android:elevation="4dp" />
+    </LinearLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:layout_width="match_parent"
