@@ -3,6 +3,7 @@ package com.example.asm2_android.View.Donor;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.LinearLayout;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,11 +12,14 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.asm2_android.R;
+import com.example.asm2_android.View.General.EditProfileActivity;
+import com.example.asm2_android.View.General.LoginActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.Objects;
 
 public class DonorProfileActivity extends AppCompatActivity {
+    private LinearLayout edit_profile, log_out;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,8 +34,25 @@ public class DonorProfileActivity extends AppCompatActivity {
         );
 
 
+        edit_profile = findViewById(R.id.edit_profile);
+        log_out = findViewById(R.id.log_out);
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setSelectedItemId(R.id.menu_profile);
+
+        edit_profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), EditProfileActivity.class));
+            }
+        });
+
+        log_out.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                finishAffinity();
+            }
+        });
 
         bottomNavigationView.setOnItemSelectedListener(item -> {
             int itemId = item.getItemId();
