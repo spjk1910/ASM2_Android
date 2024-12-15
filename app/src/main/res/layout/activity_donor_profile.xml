@@ -5,23 +5,13 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".View.Donor.DonorHomeActivity">
-
-    <com.mapbox.maps.MapView
-        android:id="@+id/map"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:mapbox_cameraTargetLat="39.5"
-        app:mapbox_cameraTargetLng="-98.0"
-        app:mapbox_cameraZoom="2.0"
-        app:mapbox_cameraPitch="0.0"
-        app:mapbox_cameraBearing="0.0"
-        app:mapbox_styleUri="mapbox://styles/mapbox/streets-v11"/>
+    android:background="@color/white"
+    tools:context=".View.Donor.DonorProfileActivity">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Map"
+        android:text="Profile"
         android:textSize="36sp"
         android:layout_centerInParent="true"/>
 

@@ -4,21 +4,23 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 
 import com.example.asm2_android.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.mapbox.maps.MapView;
 
 import java.util.Objects;
 
-public class DonorHomeActivity extends AppCompatActivity {
-    private MapView mMap;
+public class DonorProfileActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_donor_home);
+        setContentView(R.layout.activity_donor_profile);
         Objects.requireNonNull(getSupportActionBar()).hide();
         getWindow().getDecorView().setSystemUiVisibility(
                 View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
@@ -29,11 +31,14 @@ public class DonorHomeActivity extends AppCompatActivity {
 
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
-        bottomNavigationView.setSelectedItemId(R.id.menu_map);
+        bottomNavigationView.setSelectedItemId(R.id.menu_profile);
 
         bottomNavigationView.setOnItemSelectedListener(item -> {
             int itemId = item.getItemId();
             if (itemId == R.id.menu_map) {
+                startActivity(new Intent(getApplicationContext(), DonorHomeActivity.class));
+                overridePendingTransition(R.anim.slider_in_right, R.anim.slider_out_left);
+                finish();
                 return true;
             } else if (itemId == R.id.menu_history) {
                 startActivity(new Intent(getApplicationContext(), DonorHistoryActivity.class));
@@ -46,9 +51,6 @@ public class DonorHomeActivity extends AppCompatActivity {
                 finish();
                 return true;
             } else if (itemId == R.id.menu_profile) {
-                startActivity(new Intent(getApplicationContext(), DonorProfileActivity.class));
-                overridePendingTransition(R.anim.slider_in_right, R.anim.slider_out_left);
-                finish();
                 return true;
             }
             return false;
