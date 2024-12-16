@@ -7,7 +7,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="350dp"
+        android:layout_height="300dp"
         android:background="@color/bubble_gum">
 
         <ImageView
@@ -28,6 +28,102 @@
             android:layout_centerHorizontal="true"
             android:textSize="30sp"
             android:textStyle="bold"
+            android:textColor="@color/black"/>
+
+        <TextView
+            android:id="@+id/app_author_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/about_us_title"
+            android:text="App Author:"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="15dp"
+            android:textSize="24sp"
+            android:textStyle="italic"
+            android:textColor="@color/black"/>
+
+        <TextView
+            android:id="@+id/app_author"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/about_us_title"
+            android:text="Trang Doan"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="150dp"
+            android:textSize="24sp"
+            android:textStyle="italic"
+            android:textColor="@color/black"/>
+
+        <TextView
+            android:id="@+id/sid_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/app_author"
+            android:text="sID:"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="15dp"
+            android:textSize="24sp"
+            android:textStyle="italic"
+            android:textColor="@color/black"/>
+
+        <TextView
+            android:id="@+id/sid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/app_author"
+            android:text="s4027648"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="150dp"
+            android:textSize="24sp"
+            android:textStyle="italic"
+            android:textColor="@color/black"/>
+
+        <TextView
+            android:id="@+id/program_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/sid_title"
+            android:text="Program:"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="15dp"
+            android:textSize="24sp"
+            android:textStyle="italic"
+            android:textColor="@color/black"/>
+
+        <TextView
+            android:id="@+id/program"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/sid_title"
+            android:text="Software Engineering"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="150dp"
+            android:textSize="24sp"
+            android:textStyle="italic"
+            android:textColor="@color/black"/>
+
+        <TextView
+            android:id="@+id/email_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/program_title"
+            android:text="Email:"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="15dp"
+            android:textSize="24sp"
+            android:textStyle="italic"
+            android:textColor="@color/black"/>
+
+        <TextView
+            android:id="@+id/email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/program_title"
+            android:text="s4027648@rmit.edu.vn"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="150dp"
+            android:textSize="24sp"
+            android:textStyle="italic"
             android:textColor="@color/black"/>
     </RelativeLayout>
 </androidx.cardview.widget.CardView>
