@@ -1,6 +1,7 @@
 [versions]
 agp = "8.7.1"
 android = "11.8.1"
+glideVersion = "4.14.2"
 junit = "4.13.2"
 junitVersion = "1.2.1"
 espressoCore = "3.6.1"
@@ -16,9 +17,12 @@ firebaseStorage = "21.0.1"
 navigationFragment = "2.8.3"
 navigationUi = "2.8.3"
 playServicesMaps = "19.0.0"
+cardview = "1.0.0"
 
 [libraries]
 android = { module = "com.mapbox.maps:android", version.ref = "android" }
+github-compiler = { module = "com.github.bumptech.glide:compiler", version.ref = "glideVersion" }
+github-glide = { module = "com.github.bumptech.glide:glide", version.ref = "glideVersion" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
@@ -33,6 +37,7 @@ firebase-storage = { group = "com.google.firebase", name = "firebase-storage", v
 navigation-fragment = { group = "androidx.navigation", name = "navigation-fragment", version.ref = "navigationFragment" }
 navigation-ui = { group = "androidx.navigation", name = "navigation-ui", version.ref = "navigationUi" }
 play-services-maps = { module = "com.google.android.gms:play-services-maps", version.ref = "playServicesMaps" }
+cardview = { group = "androidx.cardview", name = "cardview", version.ref = "cardview" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

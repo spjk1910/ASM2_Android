@@ -40,22 +40,27 @@ public class DonorHomeActivity extends AppCompatActivity {
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setSelectedItemId(R.id.menu_map);
 
+        String currentUser = getIntent().getStringExtra("CURRENT_USER");
+
         bottomNavigationView.setOnItemSelectedListener(item -> {
             int itemId = item.getItemId();
             if (itemId == R.id.menu_map) {
                 return true;
             } else if (itemId == R.id.menu_history) {
-                startActivity(new Intent(getApplicationContext(), DonorHistoryActivity.class));
+                Intent intent = new Intent(getApplicationContext(), DonorHistoryActivity.class);
+                startActivity(intent);
                 overridePendingTransition(R.anim.slider_in_right, R.anim.slider_out_left);
                 finish();
                 return true;
             } else if (itemId == R.id.menu_notification) {
-                startActivity(new Intent(getApplicationContext(), DonorNotificationActivity.class));
+                Intent intent = new Intent(getApplicationContext(), DonorNotificationActivity.class);
+                startActivity(intent);
                 overridePendingTransition(R.anim.slider_in_right, R.anim.slider_out_left);
                 finish();
                 return true;
             } else if (itemId == R.id.menu_profile) {
-                startActivity(new Intent(getApplicationContext(), DonorProfileActivity.class));
+                Intent intent = new Intent(getApplicationContext(), DonorProfileActivity.class);
+                startActivity(intent);
                 overridePendingTransition(R.anim.slider_in_right, R.anim.slider_out_left);
                 finish();
                 return true;

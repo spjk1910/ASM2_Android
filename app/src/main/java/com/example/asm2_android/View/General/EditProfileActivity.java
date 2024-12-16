@@ -3,13 +3,22 @@ package com.example.asm2_android.View.General;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,15 +26,32 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.bumptech.glide.Glide;
 import com.example.asm2_android.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.imageview.ShapeableImageView;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
+import java.util.UUID;
 
 public class EditProfileActivity extends AppCompatActivity {
     private ImageView backButton;
     private TextView dateOfBirth, bloodType;
+    private EditText name, email, address, phone;
+    private Button updateButton;
+    private FloatingActionButton editAvatarButton;
+    private ShapeableImageView avatar;
     private ActivityResultLauncher<Intent> bloodTypeLauncher;
+    private ActivityResultLauncher<String> pickImageLauncher;
+    private Boolean updateFlag = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,8 +68,28 @@ public class EditProfileActivity extends AppCompatActivity {
         backButton = findViewById(R.id.ic_back);
         dateOfBirth = findViewById(R.id.edit_birthday);
         bloodType = findViewById(R.id.edit_blood_type);
+        name = findViewById(R.id.edit_name);
+        email = findViewById(R.id.edit_email);
+        address = findViewById(R.id.edit_address);
+        phone = findViewById(R.id.edit_phone);
+        updateButton = findViewById(R.id.update_button);
+        editAvatarButton = findViewById(R.id.edit_avatar_button);
+        avatar = findViewById(R.id.avatar);
 
         Calendar calendar = Calendar.getInstance();
+        SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
+        String currentUser = sharedPreferences.getString("USERNAME", null);
+
+        if (currentUser != null) {
+            fetchUserDetails(currentUser);
+        }
+
+        editAvatarButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pickImageLauncher.launch("image/*");
+            }
+        });
 
         dateOfBirth.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,6 +109,15 @@ public class EditProfileActivity extends AppCompatActivity {
                         },
                         year, month, dayOfMonth);
                 datePickerDialog.show();
+            }
+        });
+
+        pickImageLauncher = registerForActivityResult(new ActivityResultContracts.GetContent(), new ActivityResultCallback<Uri>() {
+            @Override
+            public void onActivityResult(Uri result) {
+                if (result != null) {
+                    uploadImageToFirestore(result,currentUser);
+                }
             }
         });
 
@@ -86,10 +141,120 @@ public class EditProfileActivity extends AppCompatActivity {
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent resultIntent = new Intent();
+                resultIntent.putExtra("updateFlag", updateFlag);
+                setResult(RESULT_OK, resultIntent);
                 finish();
             }
         });
+
+        updateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                updateFlag = true;
+                FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+                db.collection("users")
+                        .whereEqualTo("username", currentUser)
+                        .get()
+                        .addOnCompleteListener(task -> {
+                            if (task.isSuccessful() && !task.getResult().isEmpty()) {
+                                DocumentSnapshot document = task.getResult().getDocuments().get(0);
+                                Map<String, Object> updatedFields = new HashMap<>();
+                                updatedFields.put("email", email.getText().toString());
+                                updatedFields.put("phoneNumber", phone.getText().toString());
+                                updatedFields.put("address", address.getText().toString());
+                                updatedFields.put("birthday", dateOfBirth.getText().toString());
+                                updatedFields.put("bloodType", bloodType.getText().toString());
+                                updatedFields.put("name", name.getText().toString());
+
+                                db.collection("users")
+                                        .document(document.getId())
+                                        .update(updatedFields)
+                                        .addOnSuccessListener(aVoid -> {
+                                            Toast.makeText(getApplicationContext(), "User updated successfully", Toast.LENGTH_SHORT).show();
+                                        })
+                                        .addOnFailureListener(e -> {
+                                            Toast.makeText(getApplicationContext(), "Error updating user: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                        });
+                            }
+                        })
+                        .addOnFailureListener(e -> {
+                            Toast.makeText(getApplicationContext(), "Error fetching user: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                        });
+            }
+        });
     }
+
+    private void fetchUserDetails(String currentUser) {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("users").whereEqualTo("username", currentUser)
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful() && task.getResult() != null && !task.getResult().isEmpty()) {
+                        DocumentSnapshot document = task.getResult().getDocuments().get(0);
+                        String currentName = document.getString("name");
+                        String currentEmail = document.getString("email");
+                        String currentAddress = document.getString("address");
+                        String currentPhone = document.getString("phoneNumber");
+                        String currentDOB = document.getString("birthday");
+                        String currentBloodType = document.getString("bloodType");
+                        String currentAvatar = document.getString("profileImage");
+
+                        name.setText(currentName);
+                        email.setText(currentEmail);
+                        address.setText(currentAddress);
+                        phone.setText(currentPhone);
+                        dateOfBirth.setText(currentDOB);
+                        bloodType.setText(currentBloodType);
+                        if (currentAvatar != null && !currentAvatar.isEmpty()) {
+                            Glide.with(getApplicationContext())
+                                    .load(currentAvatar)
+                                    .circleCrop()
+                                    .into(avatar);
+                        } else {
+                            avatar.setImageResource(R.drawable.default_avatar);
+                        }
+                    }
+                });
+    }
+
+    private void uploadImageToFirestore(Uri imageUri, String currentUser) {
+        StorageReference storageRef = FirebaseStorage.getInstance().getReference("Account Avatar - " + currentUser);
+        ProgressBar progressBar = findViewById(R.id.progressBar);
+
+        progressBar.setVisibility(View.VISIBLE);
+
+        storageRef.putFile(imageUri)
+                .addOnSuccessListener(taskSnapshot -> {
+                    storageRef.getDownloadUrl().addOnSuccessListener(uri -> {
+                        String downloadUrl = uri.toString();
+
+                        FirebaseFirestore db = FirebaseFirestore.getInstance();
+                        DocumentReference userRef = db.collection("users").document(currentUser);
+
+                        userRef.update("profileImage", downloadUrl)
+                                .addOnSuccessListener(aVoid -> {
+                                    Glide.with(getApplicationContext())
+                                            .load(downloadUrl)
+                                            .circleCrop()
+                                            .into(avatar);
+                                    updateFlag = true;
+                                    progressBar.setVisibility(View.GONE);
+                                    Toast.makeText(getApplicationContext(), "Avatar updated", Toast.LENGTH_SHORT).show();
+                                })
+                                .addOnFailureListener(e -> {
+                                    progressBar.setVisibility(View.GONE);
+                                    Toast.makeText(getApplicationContext(), "Failed to update avatar", Toast.LENGTH_SHORT).show();
+                                });
+                    });
+                })
+                .addOnFailureListener(e -> {
+                    progressBar.setVisibility(View.GONE);
+                    Toast.makeText(getApplicationContext(), "Failed to upload image", Toast.LENGTH_SHORT).show();
+                });
+    }
+
 
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {

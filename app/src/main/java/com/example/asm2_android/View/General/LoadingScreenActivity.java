@@ -4,12 +4,14 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.asm2_android.R;
+import com.example.asm2_android.View.Donor.DonorProfileActivity;
 
 import java.util.Objects;
 

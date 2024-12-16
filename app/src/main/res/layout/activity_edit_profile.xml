@@ -8,6 +8,14 @@
     android:background="@color/white"
     tools:context=".View.General.EditProfileActivity">
 
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_centerInParent="true"
+        android:indeterminateTint="@color/red"
+        android:visibility="visible" />
+
     <RelativeLayout
         android:id="@+id/edit_profile_header"
         android:layout_width="match_parent"
@@ -71,7 +79,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/edit_profile_header"
-        android:layout_above="@+id/sign_in_button"
+        android:layout_above="@+id/update_button"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp">
 
@@ -221,7 +229,7 @@
     </ScrollView>
 
     <Button
-        android:id="@+id/sign_in_button"
+        android:id="@+id/update_button"
         android:layout_width="wrap_content"
         android:layout_height="60dp"
         android:text="Update"
