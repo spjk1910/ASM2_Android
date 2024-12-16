@@ -35,7 +35,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/about_us_title"
-            android:text="App Author:"
+            android:text="Author:"
             android:layout_marginTop="15dp"
             android:layout_marginLeft="15dp"
             android:textSize="24sp"
@@ -49,7 +49,7 @@
             android:layout_below="@+id/about_us_title"
             android:text="Trang Doan"
             android:layout_marginTop="15dp"
-            android:layout_marginLeft="150dp"
+            android:layout_marginLeft="120dp"
             android:textSize="24sp"
             android:textStyle="italic"
             android:textColor="@color/black"/>
@@ -73,7 +73,7 @@
             android:layout_below="@+id/app_author"
             android:text="s4027648"
             android:layout_marginTop="15dp"
-            android:layout_marginLeft="150dp"
+            android:layout_marginLeft="120dp"
             android:textSize="24sp"
             android:textStyle="italic"
             android:textColor="@color/black"/>
@@ -97,7 +97,7 @@
             android:layout_below="@+id/sid_title"
             android:text="Software Engineering"
             android:layout_marginTop="15dp"
-            android:layout_marginLeft="150dp"
+            android:layout_marginLeft="120dp"
             android:textSize="24sp"
             android:textStyle="italic"
             android:textColor="@color/black"/>
@@ -121,7 +121,7 @@
             android:layout_below="@+id/program_title"
             android:text="s4027648@rmit.edu.vn"
             android:layout_marginTop="15dp"
-            android:layout_marginLeft="150dp"
+            android:layout_marginLeft="120dp"
             android:textSize="24sp"
             android:textStyle="italic"
             android:textColor="@color/black"/>

@@ -1,9 +1,11 @@
 package com.example.asm2_android.View.General;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -25,9 +27,10 @@ public class RegisterActivity extends AppCompatActivity {
     private FirebaseFirestore firestore;
     private CollectionReference usersCollection;
     private EditText registerName,registerEmail, registerPassword,registerUsername;
-    private ImageView passwordVisibility;
+    private ImageView passwordVisibility, closeAboutUs, aboutUsButton;
     private Button signUpButton;
     private TextView redirectSignIn;
+    private Dialog aboutUs;
     private boolean isPasswordVisible = false;
 
     @Override
@@ -53,6 +56,7 @@ public class RegisterActivity extends AppCompatActivity {
         registerEmail = findViewById(R.id.register_email);
         registerPassword = findViewById(R.id.register_password);
         registerUsername = findViewById(R.id.register_username);
+        aboutUsButton = findViewById(R.id.about_us_button);
 
         signUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,6 +105,28 @@ public class RegisterActivity extends AppCompatActivity {
             public void onClick(View v) {
                 startActivity(new Intent(RegisterActivity.this,LoginActivity.class));
                 finish();
+            }
+        });
+
+        aboutUs = new Dialog(this);
+        aboutUs.setContentView(R.layout.about_us_sheet);
+        aboutUs.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        aboutUs.getWindow().setBackgroundDrawable(getDrawable(R.drawable.about_us_sheet_bg));
+        aboutUs.setCancelable(false);
+
+        closeAboutUs = aboutUs.findViewById(R.id.close_filter);
+
+        closeAboutUs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                aboutUs.dismiss();
+            }
+        });
+
+        aboutUsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                aboutUs.show();
             }
         });
     }

@@ -1,12 +1,13 @@
 package com.example.asm2_android.View.General;
 
-import android.app.Activity;
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.InputType;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -28,9 +29,10 @@ import java.util.Objects;
 
 public class LoginActivity extends AppCompatActivity {
     private EditText loginUsername, loginPassword;
-    private ImageView passwordVisibility;
+    private ImageView passwordVisibility, closeAboutUs, aboutUsButton;
     private Button signInButton;
     private TextView redirectSignUp;
+    private Dialog aboutUs;
     private boolean isPasswordVisible = false;
 
     @Override
@@ -52,6 +54,29 @@ public class LoginActivity extends AppCompatActivity {
         redirectSignUp = findViewById(R.id.redirect_sign_up);
         loginUsername = findViewById(R.id.register_username);
         loginPassword = findViewById(R.id.register_password);
+        aboutUsButton = findViewById(R.id.about_us_button);
+
+        aboutUs = new Dialog(this);
+        aboutUs.setContentView(R.layout.about_us_sheet);
+        aboutUs.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        aboutUs.getWindow().setBackgroundDrawable(getDrawable(R.drawable.about_us_sheet_bg));
+        aboutUs.setCancelable(false);
+
+        closeAboutUs = aboutUs.findViewById(R.id.close_filter);
+
+        closeAboutUs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                aboutUs.dismiss();
+            }
+        });
+
+        aboutUsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                aboutUs.show();
+            }
+        });
 
         signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
