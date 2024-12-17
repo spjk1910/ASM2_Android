@@ -2,6 +2,7 @@ package com.example.asm2_android.View.General;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.View;
@@ -29,7 +30,7 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText registerName,registerEmail, registerPassword,registerUsername;
     private ImageView passwordVisibility, closeAboutUs, aboutUsButton;
     private Button signUpButton;
-    private TextView redirectSignIn;
+    private TextView redirectSignIn,aboutUsEmail;
     private Dialog aboutUs;
     private boolean isPasswordVisible = false;
 
@@ -113,6 +114,7 @@ public class RegisterActivity extends AppCompatActivity {
         aboutUs.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         aboutUs.getWindow().setBackgroundDrawable(getDrawable(R.drawable.about_us_sheet_bg));
         aboutUs.setCancelable(false);
+        aboutUsEmail = aboutUs.findViewById(R.id.email);
 
         closeAboutUs = aboutUs.findViewById(R.id.close_filter);
 
@@ -120,6 +122,26 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 aboutUs.dismiss();
+            }
+        });
+
+        aboutUsEmail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
+                emailIntent.setData(Uri.parse("mailto:s4027648@rmit.edu.vn"));
+
+                if (emailIntent.resolveActivity(getPackageManager()) != null) {
+                    startActivity(emailIntent);
+                } else {
+                    try {
+                        Toast.makeText(v.getContext(), "You don't have an app, Please installed!", Toast.LENGTH_SHORT).show();
+                        Intent playStoreIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.google.android.gm"));
+                        startActivity(playStoreIntent);
+                    } catch (Exception e) {
+                        Toast.makeText(v.getContext(), "Unable to open Google Play Store", Toast.LENGTH_SHORT).show();
+                    }
+                }
             }
         });
 

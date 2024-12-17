@@ -9,6 +9,7 @@
     android:background="@drawable/register_bg"
     tools:context=".View.General.RegisterActivity">
 
+
     <ImageView
         android:id="@+id/about_us_button"
         android:layout_width="35dp"
