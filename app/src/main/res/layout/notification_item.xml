@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/notification_item_bg">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/image"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/notification_image"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="25dp"
+            android:scaleType="centerCrop"
+            android:layout_centerHorizontal="true"
+            android:layout_marginVertical="25dp"
+            android:background="@color/white"/>
+
+        <TextView
+            android:id="@+id/notification_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Notification Title"
+            android:layout_centerHorizontal="true"
+            android:layout_marginVertical="25dp"
+            android:textColor="@color/black"
+            android:textSize="25sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/notification_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/notification_title"
+            android:layout_marginTop="65dp"
+            android:layout_marginRight="25dp"
+            android:text="This is a very long notification that will automatically wrap to the next line if necessary."
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:singleLine="false"
+            android:textStyle="normal" />
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

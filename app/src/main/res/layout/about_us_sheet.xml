@@ -107,12 +107,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/program_title"
-            android:text="Email:"
-            android:layout_marginTop="15dp"
             android:layout_marginLeft="15dp"
+            android:layout_marginTop="15dp"
+            android:text="Contact:"
+            android:textColor="@color/black"
             android:textSize="24sp"
-            android:textStyle="italic"
-            android:textColor="@color/black"/>
+            android:textStyle="italic" />
 
         <TextView
             android:id="@+id/email"
