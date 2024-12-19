@@ -93,7 +93,7 @@ public class DonorProfileActivity extends AppCompatActivity {
 
         bottomNavigationView.setOnItemSelectedListener(item -> {
             int itemId = item.getItemId();
-            if (itemId == R.id.menu_map) {
+            if (itemId == R.id.menu_donation) {
                 Intent intent = new Intent(getApplicationContext(), DonorHomeActivity.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slider_in_right, R.anim.slider_out_left);

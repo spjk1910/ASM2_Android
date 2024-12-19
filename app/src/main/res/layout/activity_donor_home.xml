@@ -50,7 +50,8 @@
             android:layout_marginStart="8dp"
             android:src="@drawable/ic_filter"
             android:padding="8dp"
-            android:elevation="4dp" />
+            android:elevation="4dp"
+            app:tint="@color/grey" />
     </LinearLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -66,6 +67,7 @@
         app:menu="@menu/donor_bottom_menu"
         app:itemIconSize="30dp"
         app:itemIconTint="@drawable/item_selector"
+        app:itemTextColor="@drawable/item_selector"
         app:itemRippleColor="@android:color/transparent"
-        app:labelVisibilityMode="unlabeled"/>
+        app:labelVisibilityMode="labeled"/>
 </RelativeLayout>

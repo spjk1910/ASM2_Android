@@ -38,13 +38,13 @@ public class DonorHomeActivity extends AppCompatActivity {
 
         filter = findViewById(R.id.filter);
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
-        bottomNavigationView.setSelectedItemId(R.id.menu_map);
+        bottomNavigationView.setSelectedItemId(R.id.menu_donation);
 
         String currentUser = getIntent().getStringExtra("CURRENT_USER");
 
         bottomNavigationView.setOnItemSelectedListener(item -> {
             int itemId = item.getItemId();
-            if (itemId == R.id.menu_map) {
+            if (itemId == R.id.menu_donation) {
                 return true;
             } else if (itemId == R.id.menu_history) {
                 Intent intent = new Intent(getApplicationContext(), DonorHistoryActivity.class);

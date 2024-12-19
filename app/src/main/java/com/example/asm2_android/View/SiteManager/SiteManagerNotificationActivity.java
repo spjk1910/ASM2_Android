@@ -1,4 +1,4 @@
-package com.example.asm2_android.View.Donor;
+package com.example.asm2_android.View.SiteManager;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,12 +15,12 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.Objects;
 
-public class DonorNotificationActivity extends AppCompatActivity {
+public class SiteManagerNotificationActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_donor_notification);
+        setContentView(R.layout.activity_site_manager_notification);
         Objects.requireNonNull(getSupportActionBar()).hide();
         getWindow().getDecorView().setSystemUiVisibility(
                 View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
@@ -29,26 +29,28 @@ public class DonorNotificationActivity extends AppCompatActivity {
                         | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
         );
 
-
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setSelectedItemId(R.id.menu_notification);
 
         bottomNavigationView.setOnItemSelectedListener(item -> {
             int itemId = item.getItemId();
-            if (itemId == R.id.menu_donation) {
-                startActivity(new Intent(getApplicationContext(), DonorHomeActivity.class));
+            if (itemId == R.id.menu_manage) {
+                Intent intent = new Intent(getApplicationContext(), SiteManagerHomeActivity.class);
+                startActivity(intent);
                 overridePendingTransition(R.anim.slider_in_right, R.anim.slider_out_left);
                 finish();
                 return true;
-            } else if (itemId == R.id.menu_history) {
-                startActivity(new Intent(getApplicationContext(), DonorHistoryActivity.class));
+            } else if (itemId == R.id.menu_donation) {
+                Intent intent = new Intent(getApplicationContext(), SiteManagerDonationActivity.class);
+                startActivity(intent);
                 overridePendingTransition(R.anim.slider_in_right, R.anim.slider_out_left);
                 finish();
                 return true;
             } else if (itemId == R.id.menu_notification) {
                 return true;
             } else if (itemId == R.id.menu_profile) {
-                startActivity(new Intent(getApplicationContext(), DonorProfileActivity.class));
+                Intent intent = new Intent(getApplicationContext(), SiteManagerProfileActivity.class);
+                startActivity(intent);
                 overridePendingTransition(R.anim.slider_in_right, R.anim.slider_out_left);
                 finish();
                 return true;
