@@ -4,21 +4,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import com.example.asm2_android.R;
-import com.example.asm2_android.View.Donor.DonorHistoryActivity;
-import com.example.asm2_android.View.Donor.DonorNotificationActivity;
-import com.example.asm2_android.View.Donor.DonorProfileActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.Objects;
 
 public class SiteManagerHomeActivity extends AppCompatActivity {
+    private FloatingActionButton addButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +27,7 @@ public class SiteManagerHomeActivity extends AppCompatActivity {
                         | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
         );
 
+        addButton = findViewById(R.id.add_button);
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setSelectedItemId(R.id.menu_manage);
 
@@ -59,6 +55,14 @@ public class SiteManagerHomeActivity extends AppCompatActivity {
                 return true;
             }
             return false;
+        });
+
+        addButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), SiteManagerAddEventActivity.class);
+                startActivity(intent);
+            }
         });
     }
 

@@ -13,9 +13,10 @@ public class UserClass {
     private UserRoleEnum role;
     private String profileImage;
     private Date birthday;
+    private GenderEnum gender;
 
     public UserClass(String name, String email, String username, String password, String phoneNumber,
-                     String address, BloodEnum bloodType, UserRoleEnum role,String profileImage,Date birthday) {
+                     String address, BloodEnum bloodType, UserRoleEnum role,String profileImage,Date birthday, GenderEnum gender) {
         this.name = name;
         this.email = email;
         this.username = username;
@@ -26,6 +27,15 @@ public class UserClass {
         this.role = role;
         this.profileImage = profileImage;
         this.birthday = birthday;
+        this.gender = gender;
+    }
+
+    public GenderEnum getGender() {
+        return gender;
+    }
+
+    public void setGender(GenderEnum gender) {
+        this.gender = gender;
     }
 
     public Date getBirthday() {

@@ -9,11 +9,15 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,6 +31,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.bumptech.glide.Glide;
+import com.example.asm2_android.Model.GenderEnum;
 import com.example.asm2_android.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.imageview.ShapeableImageView;
@@ -36,6 +41,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
@@ -44,7 +50,7 @@ import java.util.UUID;
 
 public class EditProfileActivity extends AppCompatActivity {
     private ImageView backButton;
-    private TextView dateOfBirth, bloodType;
+    private TextView dateOfBirth, bloodType,gender;
     private EditText name, email, address, phone;
     private Button updateButton;
     private FloatingActionButton editAvatarButton;
@@ -72,11 +78,11 @@ public class EditProfileActivity extends AppCompatActivity {
         email = findViewById(R.id.edit_email);
         address = findViewById(R.id.edit_address);
         phone = findViewById(R.id.edit_phone);
+        gender = findViewById(R.id.edit_gender);
         updateButton = findViewById(R.id.update_button);
         editAvatarButton = findViewById(R.id.edit_avatar_button);
         avatar = findViewById(R.id.avatar);
 
-        Calendar calendar = Calendar.getInstance();
         SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
         String currentUser = sharedPreferences.getString("USERNAME", null);
 
@@ -110,6 +116,25 @@ public class EditProfileActivity extends AppCompatActivity {
                         year, month, dayOfMonth);
                 datePickerDialog.show();
             }
+        });
+
+        String[] genderOptions = Arrays.stream(GenderEnum.values())
+                .map(Enum::name)
+                .toArray(String[]::new);
+
+        gender.setOnClickListener(v -> {
+            PopupMenu popupMenu = new PopupMenu(this, gender);
+
+            for (String gender : genderOptions) {
+                popupMenu.getMenu().add(gender);
+            }
+
+            popupMenu.setOnMenuItemClickListener(item -> {
+                gender.setText(item.getTitle());
+                return true;
+            });
+
+            popupMenu.show();
         });
 
         pickImageLauncher = registerForActivityResult(new ActivityResultContracts.GetContent(), new ActivityResultCallback<Uri>() {
@@ -167,6 +192,7 @@ public class EditProfileActivity extends AppCompatActivity {
                                 updatedFields.put("birthday", dateOfBirth.getText().toString());
                                 updatedFields.put("bloodType", bloodType.getText().toString());
                                 updatedFields.put("name", name.getText().toString());
+                                updatedFields.put("gender", gender.getText().toString());
 
                                 db.collection("users")
                                         .document(document.getId())
@@ -200,11 +226,13 @@ public class EditProfileActivity extends AppCompatActivity {
                         String currentDOB = document.getString("birthday");
                         String currentBloodType = document.getString("bloodType");
                         String currentAvatar = document.getString("profileImage");
+                        String currentGender = document.getString("gender");
 
                         name.setText(currentName);
                         email.setText(currentEmail);
                         address.setText(currentAddress);
                         phone.setText(currentPhone);
+                        gender.setText(currentGender);
                         dateOfBirth.setText(currentDOB);
                         bloodType.setText(currentBloodType);
                         if (currentAvatar != null && !currentAvatar.isEmpty()) {

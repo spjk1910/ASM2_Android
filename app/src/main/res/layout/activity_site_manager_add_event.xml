@@ -6,13 +6,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".View.General.EditProfileActivity">
+    tools:context=".View.SiteManager.SiteManagerAddEventActivity">
 
     <RelativeLayout
-        android:id="@+id/edit_profile_header"
+        android:id="@+id/header_title"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:background="@drawable/edit_profile_header">
+        android:layout_height="wrap_content">
 
         <ImageView
             android:id="@+id/ic_back"
@@ -21,14 +20,14 @@
             android:src="@drawable/ic_back"
             android:layout_alignParentStart="true"
             android:layout_margin="20dp"
-            app:tint="@color/white" />
+            app:tint="@color/black" />
 
         <TextView
-            android:id="@+id/edit_profile_title"
+            android:id="@+id/title_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Edit Profile"
-            android:textColor="@color/white"
+            android:text="Set Up Donation Site"
+            android:textColor="@color/black"
             android:textSize="25sp"
             android:textStyle="bold"
             android:layout_centerHorizontal="true"
@@ -36,42 +35,12 @@
             android:layout_marginTop="16dp"/>
     </RelativeLayout>
 
-    <RelativeLayout
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_below="@+id/edit_profile_title"
-        tools:ignore="NotSibling"
-        android:layout_centerHorizontal="true"
-        android:layout_marginVertical="125dp">
-
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/avatar"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:src="@drawable/default_avatar"
-            android:scaleType="centerCrop"
-            android:background="@color/grey"
-            app:shapeAppearanceOverlay="@style/Avatar_Placeholder"/>
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/edit_avatar_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:src="@drawable/ic_camera"
-            app:tint="@color/white"
-            android:layout_marginEnd="-5dp"
-            android:layout_alignParentBottom="true"
-            app:fabCustomSize="40dp"
-            app:backgroundTint="@color/vibrant_pink"/>
-    </RelativeLayout>
-
     <ScrollView
-        android:id="@+id/edit_profile_scroll"
+        android:id="@+id/scroll_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/edit_profile_header"
-        android:layout_above="@+id/update_button"
+        android:layout_below="@id/header_title"
+        android:layout_above="@+id/submit_button"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp">
 
@@ -85,7 +54,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Name"
+                android:text="Event Name"
                 android:textSize="20sp"
                 android:textColor="@color/black"
                 android:textStyle="bold"
@@ -93,10 +62,10 @@
                 android:layout_marginStart="5dp"/>
 
             <EditText
-                android:id="@+id/edit_name"
+                android:id="@+id/add_event_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Name"
+                android:hint="Event Name"
                 android:singleLine="false"
                 android:padding="20dp"
                 android:layout_marginTop="10dp"
@@ -108,41 +77,17 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Email"
+                android:text="Site Manager"
                 android:textSize="20sp"
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 android:layout_marginStart="5dp"
                 android:layout_marginTop="20dp"/>
-
-            <EditText
-                android:id="@+id/edit_email"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/register_border"
-                android:hint="Email"
-                android:singleLine="false"
-                android:padding="20dp"
-                android:textColor="@color/black"
-                android:textColorHint="@color/grey"
-                android:textSize="16sp" />
 
             <TextView
+                android:id="@+id/add_site_manager_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Address"
-                android:textSize="20sp"
-                android:textColor="@color/black"
-                android:textStyle="bold"
-                android:layout_marginStart="5dp"
-                android:layout_marginTop="20dp"/>
-
-            <EditText
-                android:id="@+id/edit_address"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Address"
                 android:singleLine="false"
                 android:padding="20dp"
                 android:layout_marginTop="10dp"
@@ -154,7 +99,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Phone Number"
+                android:text="Contact"
                 android:textSize="20sp"
                 android:textColor="@color/black"
                 android:textStyle="bold"
@@ -162,10 +107,10 @@
                 android:layout_marginTop="20dp"/>
 
             <EditText
-                android:id="@+id/edit_phone"
+                android:id="@+id/add_contact"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Phone Number"
+                android:hint="Contact"
                 android:padding="20dp"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/register_border"
@@ -176,7 +121,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Gender"
+                android:text="Location"
                 android:textSize="20sp"
                 android:textColor="@color/black"
                 android:textStyle="bold"
@@ -184,23 +129,23 @@
                 android:layout_marginTop="20dp"/>
 
             <TextView
-                android:id="@+id/edit_gender"
+                android:id="@+id/add_location"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Gender"
+                android:hint="Location"
+                android:singleLine="false"
+                android:clickable="true"
                 android:padding="20dp"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/register_border"
                 android:textColorHint="@color/grey"
                 android:textColor="@color/black"
-                android:textSize="16sp"
-                android:focusable="false"
-                android:clickable="true"/>
+                android:textSize="16sp"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Date of Birth"
+                android:text="Date Start"
                 android:textSize="20sp"
                 android:textColor="@color/black"
                 android:textStyle="bold"
@@ -208,50 +153,169 @@
                 android:layout_marginTop="20dp"/>
 
             <TextView
-                android:id="@+id/edit_birthday"
+                android:id="@+id/add_date_start"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Date of Birth"
+                android:hint="Date Start"
+                android:clickable="true"
                 android:padding="20dp"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/register_border"
                 android:textColorHint="@color/grey"
                 android:textColor="@color/black"
-                android:textSize="16sp"
-                android:focusable="false"
-                android:clickable="true"/>
+                android:textSize="16sp"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Blood Type"
+                android:text="Blood Type Needed"
                 android:textSize="20sp"
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 android:layout_marginStart="5dp"
                 android:layout_marginTop="20dp"/>
 
-            <TextView
-                android:id="@+id/edit_blood_type"
+            <GridLayout
+                android:id="@+id/blood_type_grid"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Blood Type"
+                android:layout_marginTop="10dp"
+                android:columnCount="4"
+                android:padding="20dp">
+
+                <CheckBox
+                    android:id="@+id/checkbox_A_plus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="A+"
+                    android:textSize="20sp"
+                    android:textStyle="normal"
+                    android:textColor="@color/black"
+                    android:buttonTint="@color/black"
+                    android:layout_row="0"
+                    android:layout_column="0" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_A_minus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="A-"
+                    android:buttonTint="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="normal"
+                    android:layout_marginLeft="10dp"
+                    android:textColor="@color/black"
+                    android:layout_row="0"
+                    android:layout_column="1" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_B_plus"
+                    android:buttonTint="@color/black"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="B+"
+                    android:textSize="20sp"
+                    android:textStyle="normal"
+                    android:layout_marginLeft="10dp"
+                    android:textColor="@color/black"
+                    android:layout_row="0"
+                    android:layout_column="2" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_B_minus"
+                    android:buttonTint="@color/black"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="B-"
+                    android:textSize="20sp"
+                    android:textStyle="normal"
+                    android:layout_marginLeft="10dp"
+                    android:textColor="@color/black"
+                    android:layout_row="0"
+                    android:layout_column="3" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_O_plus"
+                    android:buttonTint="@color/black"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="O+"
+                    android:textSize="20sp"
+                    android:textStyle="normal"
+                    android:textColor="@color/black"
+                    android:layout_row="1"
+                    android:layout_column="0" />
+
+                <CheckBox
+                    android:buttonTint="@color/black"
+                    android:id="@+id/checkbox_O_minus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="O-"
+                    android:textSize="20sp"
+                    android:textStyle="normal"
+                    android:layout_marginLeft="10dp"
+                    android:textColor="@color/black"
+                    android:layout_row="1"
+                    android:layout_column="1" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_AB_plus"
+                    android:buttonTint="@color/black"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="AB+"
+                    android:textSize="20sp"
+                    android:textStyle="normal"
+                    android:layout_marginLeft="10dp"
+                    android:textColor="@color/black"
+                    android:layout_row="1"
+                    android:layout_column="2" />
+
+                <CheckBox
+                    android:id="@+id/checkbox_AB_minus"
+                    android:buttonTint="@color/black"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="AB-"
+                    android:textSize="20sp"
+                    android:textStyle="normal"
+                    android:layout_marginLeft="10dp"
+                    android:textColor="@color/black"
+                    android:layout_row="1"
+                    android:layout_column="3" />
+            </GridLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Event Mission"
+                android:textSize="20sp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="20dp"/>
+
+            <EditText
+                android:id="@+id/add_event_mission"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Event Mission"
                 android:padding="20dp"
+                android:singleLine="false"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/register_border"
                 android:textColorHint="@color/grey"
                 android:textColor="@color/black"
-                android:textSize="16sp"
-                android:focusable="false"
-                android:clickable="true"/>
+                android:textSize="16sp"/>
         </LinearLayout>
     </ScrollView>
 
     <Button
-        android:id="@+id/update_button"
+        android:id="@+id/submit_button"
         android:layout_width="wrap_content"
         android:layout_height="60dp"
-        android:text="Update"
+        android:text="Submit"
         android:textColor="@color/white"
         android:textSize="18sp"
         app:backgroundTint="@color/vibrant_pink"
@@ -268,5 +332,4 @@
         android:layout_centerInParent="true"
         android:indeterminateTint="@color/red"
         android:visibility="invisible" />
-
 </RelativeLayout>

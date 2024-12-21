@@ -189,7 +189,7 @@ public class RegisterActivity extends AppCompatActivity {
         String name = registerName.getText().toString();
         String password = registerPassword.getText().toString();
 
-        UserClass newUser = new UserClass(name, email, username, password, "", "", null, UserRoleEnum.DONORS, "", null);
+        UserClass newUser = new UserClass(name, email, username, password, null, null, null, UserRoleEnum.DONORS, null, null, null);
 
         showLoadingScreen();
 
