@@ -1,8 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
+    android:background="@color/white"
+    tools:context=".View.General.FailledRegisterActivity">
 
     <ImageView
         android:id="@+id/ic_back"
@@ -39,7 +43,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="320dp"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:orientation="vertical"
@@ -49,7 +53,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="You are Not Eligible for\nBlood Donation"
+            android:text="You are Not Eligible for Blood Donation"
             android:textSize="30sp"
             android:textColor="@color/black"
             android:textStyle="bold"
@@ -64,11 +68,12 @@
             app:tint="@color/blood_orange" />
 
         <TextView
+            android:id="@+id/reason"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:layout_centerInParent="true"
-            android:text="Thank you for yourparticipation"
+            android:text="You must be older than 18 and under 65 years of age\n\nYou need to weigh at least 42 kg if female or 45 kg if male"
             android:textSize="24sp"
             android:textColor="@android:color/black"
             android:textStyle="bold" />
@@ -82,5 +87,4 @@
         android:layout_height="50dp"
         android:background="@color/blood_orange"
         android:layout_alignParentBottom="true" />
-
 </RelativeLayout>

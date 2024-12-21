@@ -23,7 +23,10 @@
         android:theme="@style/Theme.ASM2_Android"
         tools:targetApi="31">
         <activity
-            android:name=".Model.RegisterEventActivity"
+            android:name=".View.General.FailledRegisterActivity"
+            android:exported="false" />
+        <activity
+            android:name=".View.General.RegisterEventActivity"
             android:exported="false" />
 
         <meta-data

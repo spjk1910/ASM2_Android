@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.asm2_android.Model.UserRoleEnum;
 import com.example.asm2_android.R;
 
 import com.example.asm2_android.View.Donor.DonorHomeActivity;
@@ -176,10 +177,20 @@ public class LoginActivity extends AppCompatActivity {
                             String dbPassword = document.getString("password");
 
                             if (dbPassword != null && dbPassword.equals(password)) {
-                                String role = document.getString("role");
+                                String roleStr = document.getString("role");
+                                UserRoleEnum role = null;
+                                if (UserRoleEnum.DONORS.name().equals(roleStr)) {
+                                    role = UserRoleEnum.DONORS;
+                                } else if (UserRoleEnum.SITE_MANAGERS.name().equals(roleStr)) {
+                                    role = UserRoleEnum.SITE_MANAGERS;
+                                } else if (UserRoleEnum.SUPER_USERS.name().equals(roleStr)) {
+                                    role = UserRoleEnum.SUPER_USERS;
+                                } else {
+                                    Toast.makeText(LoginActivity.this, "Invalid role!", Toast.LENGTH_SHORT).show();
+                                }
                                 Toast.makeText(LoginActivity.this, "Login Successful!", Toast.LENGTH_SHORT).show();
                                 if (role != null) {
-                                    showLoadingScreen(getHomeActivityClass(role),username);
+                                    showLoadingScreen(getHomeActivityClass(role),username,role);
                                 } else {
                                     Toast.makeText(LoginActivity.this, "Role not defined for user!", Toast.LENGTH_SHORT).show();
                                 }
@@ -200,10 +211,20 @@ public class LoginActivity extends AppCompatActivity {
                                                 String dbUsername2 = document2.getString("username");
 
                                                 if (dbPassword2 != null && dbPassword2.equals(password)) {
-                                                    String role = document2.getString("role");
+                                                    String roleStr = document2.getString("role");
+                                                    UserRoleEnum role = null;
+                                                    if (UserRoleEnum.DONORS.name().equals(roleStr)) {
+                                                        role = UserRoleEnum.DONORS;
+                                                    } else if (UserRoleEnum.SITE_MANAGERS.name().equals(roleStr)) {
+                                                        role = UserRoleEnum.SITE_MANAGERS;
+                                                    } else if (UserRoleEnum.SUPER_USERS.name().equals(roleStr)) {
+                                                        role = UserRoleEnum.SUPER_USERS;
+                                                    } else {
+                                                        Toast.makeText(LoginActivity.this, "Invalid role!", Toast.LENGTH_SHORT).show();
+                                                    }
                                                     Toast.makeText(LoginActivity.this, "Login Successful!", Toast.LENGTH_SHORT).show();
                                                     if (role != null) {
-                                                        showLoadingScreen(getHomeActivityClass(role),dbUsername2);
+                                                        showLoadingScreen(getHomeActivityClass(role),dbUsername2,role);
                                                     } else {
                                                         Toast.makeText(LoginActivity.this, "Role not defined for user!", Toast.LENGTH_SHORT).show();
                                                     }
@@ -241,13 +262,13 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    private Class<?> getHomeActivityClass(String role) {
+    private Class<?> getHomeActivityClass(UserRoleEnum role) {
         switch (role) {
-            case "DONORS":
+            case DONORS:
                 return DonorHomeActivity.class;
-            case "SITE_MANAGERS":
+            case SITE_MANAGERS:
                 return SiteManagerHomeActivity.class;
-            case "SUPER_USERS":
+            case SUPER_USERS:
                 return SuperUserHomeActivity.class;
             default:
                 Toast.makeText(LoginActivity.this, "Invalid role!", Toast.LENGTH_SHORT).show();
@@ -255,12 +276,13 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    private void showLoadingScreen(Class<?> targetActivity,String currentUser) {
+    private void showLoadingScreen(Class<?> targetActivity, String currentUser, UserRoleEnum currentRole) {
         Intent intent = new Intent(LoginActivity.this, LoadingScreenActivity.class);
         intent.putExtra("ACTIVITY_NAME", targetActivity.getName());
         SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("USERNAME", currentUser);
+        editor.putString("userRole", String.valueOf(currentRole));
         editor.apply();
         Log.d("Current User", currentUser);
         startActivity(intent);
