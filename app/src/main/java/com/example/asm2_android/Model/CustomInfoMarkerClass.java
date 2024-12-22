@@ -5,12 +5,22 @@ public class CustomInfoMarkerClass {
     private String bloodType;
     private String startDate;
     private int image;
+    private String eventID;
 
-    public CustomInfoMarkerClass(String eventName, String bloodType, String startDate, int image) {
+    public CustomInfoMarkerClass(String eventName, String bloodType, String startDate, int image, String eventID) {
         this.eventName = eventName;
         this.bloodType = bloodType;
         this.startDate = startDate;
         this.image = image;
+        this.eventID = eventID;
+    }
+
+    public String getEventID() {
+        return eventID;
+    }
+
+    public void setEventID(String eventID) {
+        this.eventID = eventID;
     }
 
     public String getEventName() {

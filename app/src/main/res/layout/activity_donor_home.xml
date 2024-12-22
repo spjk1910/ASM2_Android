@@ -17,38 +17,48 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="10dp"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:background="@android:color/transparent"
-        android:elevation="4dp">
+        android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/search"
-            android:layout_width="0dp"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:iconifiedByDefault="false"
-            android:background="@drawable/search_bg"
-            android:drawableStart="@drawable/ic_search"
-            android:hint="Searching..."
-            android:textColor="@color/black"
-            android:textColorHint="@color/black"
-            android:padding="8dp"
-            android:elevation="4dp" />
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <EditText
+                android:id="@+id/search"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:iconifiedByDefault="false"
+                android:background="@drawable/search_bg"
+                android:drawableStart="@drawable/ic_search"
+                android:hint="Searching..."
+                android:textColor="@color/black"
+                android:textColorHint="@color/black"
+                android:padding="8dp"
+                android:elevation="4dp" />
+
+            <ImageView
+                android:id="@+id/filter"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="8dp"
+                android:src="@drawable/ic_filter"
+                android:padding="8dp"
+                android:elevation="4dp"
+                app:tint="@color/black" />
+        </LinearLayout>
 
         <ImageView
-            android:id="@+id/filter"
+            android:id="@+id/find_button"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_marginStart="8dp"
-            android:src="@drawable/ic_filter"
+            android:layout_marginStart="350dp"
+            android:src="@drawable/ic_gps"
             android:padding="8dp"
             android:elevation="4dp"
-            app:tint="@color/grey" />
+            app:tint="@color/black" />
     </LinearLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView

@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".View.Donor.DonorSiteDetailActivity"
+    android:background="@color/white">
+
+    <RelativeLayout
+        android:id="@+id/event_detail_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/ic_back"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@drawable/ic_back"
+            android:layout_alignParentStart="true"
+            android:layout_margin="20dp"
+            app:tint="@color/black" />
+
+        <TextView
+            android:id="@+id/donation_site_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Donation Site Detail"
+            android:textColor="@color/black"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="16dp"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/event_detail_body"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/event_detail_header">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/event_detail_header"
+            android:layout_above="@+id/button_area"
+            android:layout_marginTop="30dp"
+            tools:ignore="NotSibling">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:id="@+id/blood_type_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center_horizontal">
+
+                    <LinearLayout
+                        android:id="@+id/blood_type_list_top"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_horizontal">
+
+                        <!-- Add components in code based on quantity of blood type -->
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/blood_type_list_bottom"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="10dp"
+                        android:gravity="center_horizontal">
+
+                        <!-- Add components in code based on quantity of blood type -->
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/blood_type_needed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/blood_type_list"
+                    android:layout_marginTop="10dp"
+                    android:text="Blood Type Needed"
+                    android:textSize="24sp"
+                    android:layout_centerInParent="true"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_below="@+id/blood_type_needed">
+
+                    <RelativeLayout
+                        android:layout_marginTop="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="@color/grey" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:drawableStart="@drawable/ic_event"
+                            android:drawableTint="@color/blood_orange"
+                            android:text="Event"
+                            android:layout_marginTop="10dp"
+                            android:layout_alignParentStart="true"
+                            android:drawablePadding="10dp"
+                            android:textSize="20sp"
+                            android:textColor="@color/black"/>
+
+                        <TextView
+                            android:id="@+id/event_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Event Name"
+                            android:maxWidth="180dp"
+                            android:textAlignment="textEnd"
+                            android:layout_marginTop="10dp"
+                            android:textSize="20sp"
+                            android:layout_alignParentEnd="true"
+                            android:textColor="@color/black"/>
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_marginTop="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="@color/grey" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:drawableStart="@drawable/ic_username"
+                            android:drawableTint="@color/blood_orange"
+                            android:text="Site Manager"
+                            android:layout_marginTop="10dp"
+                            android:layout_alignParentStart="true"
+                            android:drawablePadding="10dp"
+                            android:textSize="20sp"
+                            android:textColor="@color/black"/>
+
+                        <TextView
+
+                            android:id="@+id/site_manager_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:maxWidth="180dp"
+                            android:textAlignment="textEnd"
+                            android:text="Site Manager Name"
+                            android:layout_marginTop="10dp"
+                            android:textSize="20sp"
+                            android:layout_alignParentEnd="true"
+                            android:textColor="@color/black"/>
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_marginTop="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="@color/grey" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:drawableStart="@drawable/ic_phone"
+                            android:drawableTint="@color/blood_orange"
+                            android:text="Contact"
+                            android:layout_marginTop="10dp"
+                            android:layout_alignParentStart="true"
+                            android:drawablePadding="10dp"
+                            android:textSize="20sp"
+                            android:textColor="@color/black"/>
+
+                        <TextView
+                            android:maxWidth="180dp"
+                            android:textAlignment="textEnd"
+                            android:id="@+id/contact_number"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="9856878587"
+                            android:layout_marginTop="10dp"
+                            android:textSize="20sp"
+                            android:layout_alignParentEnd="true"
+                            android:textColor="@color/black"/>
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_marginTop="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="@color/grey" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:drawableStart="@drawable/ic_location"
+                            android:drawableTint="@color/blood_orange"
+                            android:text="Location"
+                            android:layout_marginTop="10dp"
+                            android:layout_alignParentStart="true"
+                            android:drawablePadding="10dp"
+                            android:textSize="20sp"
+                            android:textColor="@color/black"/>
+
+                        <TextView
+                            android:id="@+id/event_location"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:maxWidth="180dp"
+                            android:textAlignment="textEnd"
+                            android:text="AGS Hospital, Moolakulam"
+                            android:singleLine="false"
+                            android:layout_marginTop="10dp"
+                            android:textSize="20sp"
+                            android:layout_alignParentEnd="true"
+                            android:textColor="@color/black"/>
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_marginTop="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:background="@color/grey" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:drawableStart="@drawable/ic_calendar"
+                            android:drawableTint="@color/blood_orange"
+                            android:text="Date Start"
+                            android:layout_marginTop="10dp"
+                            android:layout_alignParentStart="true"
+                            android:drawablePadding="10dp"
+                            android:textSize="20sp"
+                            android:textColor="@color/black"/>
+
+                        <TextView
+                            android:id="@+id/event_date_start"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:maxWidth="180dp"
+                            android:textAlignment="textEnd"
+                            android:text="Dec.21.2024"
+                            android:singleLine="false"
+                            android:layout_marginTop="10dp"
+                            android:textSize="20sp"
+                            android:layout_alignParentEnd="true"
+                            android:textColor="@color/black"/>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_below="@id/event_date_start"
+                            android:background="@color/grey"/>
+                    </RelativeLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="Event Mission"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"
+                        android:textSize="20sp"/>
+
+                    <TextView
+                        android:id="@+id/event_mission"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:singleLine="false"
+                        android:text="Event misison detail. For example: We want to help more and more people in the world"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"/>
+                </LinearLayout>
+            </RelativeLayout>
+        </ScrollView>
+
+        <LinearLayout
+            android:id="@+id/button_area"
+            android:orientation="vertical"
+            android:gravity="end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp">
+            <Button
+                android:id="@+id/register_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Register"
+                android:layout_marginStart="10dp"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                app:backgroundTint="@color/vibrant_pink"
+                app:cornerRadius="20dp"/>
+        </LinearLayout>
+    </RelativeLayout>
+</RelativeLayout>
