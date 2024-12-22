@@ -2,8 +2,13 @@ package com.example.asm2_android.View.Donor;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -11,16 +16,24 @@ import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+import androidx.core.content.res.ResourcesCompat;
 
+import com.bumptech.glide.Glide;
 import com.example.asm2_android.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Calendar;
 import java.util.Objects;
@@ -30,7 +43,6 @@ public class DonorHomeActivity extends AppCompatActivity implements OnMapReadyCa
     private Dialog filterSheet;
     private TextView dateOfEvent;
     private GoogleMap mMap;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +56,7 @@ public class DonorHomeActivity extends AppCompatActivity implements OnMapReadyCa
                         | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
         );
 
+
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
@@ -51,6 +64,8 @@ public class DonorHomeActivity extends AppCompatActivity implements OnMapReadyCa
         filter = findViewById(R.id.filter);
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setSelectedItemId(R.id.menu_donation);
+
+        String currentUser = getIntent().getStringExtra("CURRENT_USER");
 
         bottomNavigationView.setOnItemSelectedListener(item -> {
             int itemId = item.getItemId();
@@ -128,14 +143,6 @@ public class DonorHomeActivity extends AppCompatActivity implements OnMapReadyCa
     }
 
     @Override
-    public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
-    }
-
-    @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
         if (hasFocus) {
@@ -147,4 +154,46 @@ public class DonorHomeActivity extends AppCompatActivity implements OnMapReadyCa
             );
         }
     }
+
+    @Override
+    public void onMapReady(@NonNull GoogleMap googleMap) {
+        mMap = googleMap;
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        db.collection("events")
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful() && task.getResult() != null) {
+                        for (DocumentSnapshot document : task.getResult().getDocuments()) {
+                            double latitude = document.getDouble("latitude");
+                            double longitude = document.getDouble("longitude");
+                            String eventName = document.getString("eventName");
+                            Boolean open = document.getBoolean("open");
+
+                            if (open) {
+                                LatLng eventLocation = new LatLng(latitude, longitude);
+                                mMap.addMarker(new MarkerOptions().position(eventLocation).title(eventName)
+                                        .icon(BitmapDescriptorFactory.fromBitmap(getBitmapFromDrawable(R.drawable.maker_image))));
+                                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(eventLocation, 15));
+                            }
+                        }
+                    } else {
+                        Log.e("Firestore Error", "Error getting documents: ", task.getException());
+                    }
+                });
+    }
+
+    private Bitmap getBitmapFromDrawable(int vectorResId) {
+        Bitmap bitmap = null;
+        Drawable drawable = ResourcesCompat.getDrawable(getResources(), vectorResId, null);
+
+        if (drawable != null) {
+            bitmap = Bitmap.createBitmap(150, 150, Bitmap.Config.ARGB_8888);
+            Canvas canvas = new Canvas(bitmap);
+            drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+            drawable.draw(canvas);
+        }
+        return bitmap;
+    }
+
 }

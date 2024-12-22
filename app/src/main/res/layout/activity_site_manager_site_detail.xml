@@ -310,8 +310,11 @@
                 </LinearLayout>
             </RelativeLayout>
         </ScrollView>
+
         <LinearLayout
             android:id="@+id/button_area"
+            android:orientation="vertical"
+            android:gravity="end"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
@@ -319,26 +322,42 @@
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp">
 
-            <Button
-                android:id="@+id/modify_button"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Modify"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/end_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="End Event"
+                    android:textColor="@color/white"
+                    android:drawableStart="@drawable/ic_close"
+                    android:textSize="16sp"
+                    app:backgroundTint="@color/red"
+                    app:cornerRadius="20dp"/>
+
+                <Button
+                    android:id="@+id/modify_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Modify"
+                    android:layout_marginStart="10dp"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    app:backgroundTint="@color/vibrant_pink"
+                    app:cornerRadius="20dp"/>
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/download_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Download List of Donors"
                 android:textColor="@color/white"
                 android:textSize="16sp"
                 app:backgroundTint="@color/vibrant_pink"
-                app:cornerRadius="20dp"/>
-
-            <Button
-                android:id="@+id/end_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:text="End Event"
-                android:textColor="@color/white"
-                android:drawableStart="@drawable/ic_close"
-                android:textSize="16sp"
-                app:backgroundTint="@color/red"
                 app:cornerRadius="20dp"/>
         </LinearLayout>
     </RelativeLayout>

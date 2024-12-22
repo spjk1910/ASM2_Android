@@ -23,7 +23,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.asm2_android.Model.EventClass;
 import com.example.asm2_android.R;
 import com.example.asm2_android.View.General.ChooseLocationActivity;
+import com.example.asm2_android.View.General.RegisterActivity;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.SimpleDateFormat;
@@ -43,7 +45,10 @@ public class SiteManagerAddEventActivity extends AppCompatActivity {
     private EditText eventName, contact, eventMission;
     private ActivityResultLauncher<Intent> chooseLocationLauncher;
     private ProgressBar progressBar;
+    private FirebaseFirestore firestore;
+    private CollectionReference eventsCollection;
     private CheckBox A_plus, A_minus, B_plus, B_minus, O_plus, O_minus, AB_plus, AB_minus;
+    private double latitude, longitude;
 
 
     @Override
@@ -75,6 +80,8 @@ public class SiteManagerAddEventActivity extends AppCompatActivity {
         O_minus = findViewById(R.id.checkbox_O_minus);
         AB_plus = findViewById(R.id.checkbox_AB_plus);
         AB_minus = findViewById(R.id.checkbox_AB_minus);
+        firestore = FirebaseFirestore.getInstance();
+        eventsCollection = firestore.collection("events");
 
         SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
         String currentUser = sharedPreferences.getString("USERNAME", null);
@@ -124,44 +131,47 @@ public class SiteManagerAddEventActivity extends AppCompatActivity {
                     String[] bloodTypes = getSelectedBloodTypes();
 
                     EventClass event = new EventClass(
+                            currentUser,
                             eventName.getText().toString(),
                             siteManagerName.getText().toString(),
                             contact.getText().toString(),
+                            latitude,
+                            longitude,
                             location.getText().toString(),
                             dateStart.getText().toString(),
                             eventMission.getText().toString(),
                             bloodTypes
                     );
 
-                    FirebaseFirestore db = FirebaseFirestore.getInstance();
-
                     Map<String, Object> eventData = new HashMap<>();
+                    eventData.put("siteManagerUsername",event.getSiteManagerUsername());
                     eventData.put("eventName", event.getEventName());
                     eventData.put("siteManagerName", event.getSiteManagerName());
                     eventData.put("contact", event.getContact());
-                    eventData.put("location", event.getLocation());
+                    eventData.put("locationName", event.getLocationName());
+                    eventData.put("latitude", event.getLatitude());
+                    eventData.put("longitude", event.getLongitude());
                     eventData.put("dateStart", event.getDateStart());
                     eventData.put("eventMission", event.getEventMission());
                     eventData.put("bloodTypes", Arrays.asList(bloodTypes));
+                    eventData.put("open", true);
 
-                    db.collection("users")
-                            .document(currentUser)
-                            .collection("events")
-                            .add(eventData)
-                            .addOnSuccessListener(documentReference -> {
-                                Log.d("Firestore", "Event added with ID: " + documentReference.getId());
-                                Toast.makeText(getApplicationContext(), "Blood Donation Event created successfully!", Toast.LENGTH_SHORT).show();
-                                finish();
-                            })
-                            .addOnFailureListener(e -> {
-                                Log.w("Firestore", "Error adding event", e);
-                                Toast.makeText(getApplicationContext(), "Error creating Blood Donation Event!", Toast.LENGTH_SHORT).show();
+                    String id = event.getSiteManagerUsername() + event.getEventName().trim().replaceAll("\\s+", "");
+
+                    eventsCollection.document(id).set(eventData)
+                            .addOnCompleteListener(task -> {
+                                if (task.isSuccessful()) {
+                                    Intent intent = new Intent(SiteManagerAddEventActivity.this, SiteManagerHomeActivity.class);
+                                    startActivity(intent);
+                                    finish();
+                                    Toast.makeText(SiteManagerAddEventActivity.this, "Successfully Adding New Event!", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(SiteManagerAddEventActivity.this, "Adding New Event Failed. Please try again.", Toast.LENGTH_SHORT).show();
+                                }
                             });
                 }
             }
         });
-
-
 
         dateStart.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -214,11 +224,11 @@ public class SiteManagerAddEventActivity extends AppCompatActivity {
                     if (result.getResultCode() == Activity.RESULT_OK) {
                         Intent data = result.getData();
                         if (data != null) {
-                            double latitude = data.getDoubleExtra("latitude", 0.0);
-                            double longitude = data.getDoubleExtra("longitude", 0.0);
+                            latitude = data.getDoubleExtra("latitude", 0.0);
+                            longitude = data.getDoubleExtra("longitude", 0.0);
+                            String locationName = data.getStringExtra("locationName");
 
-                            LatLng selectedLocation = new LatLng(latitude, longitude);
-                            location.setText("Latitude: " + latitude + ", Longitude: " + longitude);
+                            location.setText(locationName);
                         }
                     }
                 }

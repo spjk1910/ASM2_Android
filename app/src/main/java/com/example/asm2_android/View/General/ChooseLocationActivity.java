@@ -66,7 +66,7 @@ public class ChooseLocationActivity extends AppCompatActivity implements OnMapRe
                         currentLocation.setLatitude(location.latitude);
                         currentLocation.setLongitude(location.longitude);
 
-                        search.setText(place.getFormattedAddress());
+                        search.setText(place.getDisplayName());
                     }
                 }
             }
@@ -115,6 +115,7 @@ public class ChooseLocationActivity extends AppCompatActivity implements OnMapRe
                     Intent resultIntent = new Intent();
                     resultIntent.putExtra("latitude", currentLocation.getLatitude());
                     resultIntent.putExtra("longitude", currentLocation.getLongitude());
+                    resultIntent.putExtra("locationName", search.getText().toString());
 
                     setResult(Activity.RESULT_OK, resultIntent);
                     finish();
