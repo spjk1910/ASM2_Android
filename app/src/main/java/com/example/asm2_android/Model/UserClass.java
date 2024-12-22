@@ -12,11 +12,11 @@ public class UserClass {
     private BloodEnum bloodType;
     private UserRoleEnum role;
     private String profileImage;
-    private Date birthday;
+    private String birthday;
     private GenderEnum gender;
 
     public UserClass(String name, String email, String username, String password, String phoneNumber,
-                     String address, BloodEnum bloodType, UserRoleEnum role,String profileImage,Date birthday, GenderEnum gender) {
+                     String address, BloodEnum bloodType, UserRoleEnum role,String profileImage,String birthday, GenderEnum gender) {
         this.name = name;
         this.email = email;
         this.username = username;
@@ -38,11 +38,11 @@ public class UserClass {
         this.gender = gender;
     }
 
-    public Date getBirthday() {
+    public String getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(Date birthday) {
+    public void setBirthday(String birthday) {
         this.birthday = birthday;
     }
 

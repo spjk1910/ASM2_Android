@@ -165,22 +165,34 @@
             android:textColor="@color/black"/>
 
         <TextView
+            android:id="@+id/clear_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/blood_type_grid"
+            android:layout_marginLeft="260dp"
+            android:layout_marginTop="5dp"
+            android:text="Clear Date"
+            android:textSize="20dp"
+            android:textStyle="normal"
+            android:textColor="@color/black"/>
+
+        <TextView
             android:id="@+id/date_of_event"
             android:layout_width="350dp"
             android:layout_height="wrap_content"
             android:layout_below="@id/date_of_event_title"
-            android:drawableStart="@drawable/ic_calendar"
             android:layout_marginLeft="20dp"
-            android:hint="Select Date"
-            android:textSize="18sp"
+            android:layout_marginTop="1dp"
+            android:background="@drawable/search_bg"
+            android:drawableStart="@drawable/ic_calendar"
+            android:text="Select Date"
+            android:padding="10dp"
             android:textColor="@color/black"
             android:textColorHighlight="@color/black"
-            android:padding="10dp"
-            android:background="@drawable/search_bg"
-           />
+            android:textSize="18sp" />
 
         <Button
-            android:id="@+id/sign_in_button"
+            android:id="@+id/buttonSave"
             android:layout_below="@id/date_of_event"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

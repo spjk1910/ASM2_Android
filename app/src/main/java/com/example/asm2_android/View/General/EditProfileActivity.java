@@ -33,6 +33,7 @@ import androidx.core.view.WindowInsetsCompat;
 import com.bumptech.glide.Glide;
 import com.example.asm2_android.Model.GenderEnum;
 import com.example.asm2_android.R;
+import com.example.asm2_android.View.SiteManager.SiteManagerAddEventActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.imageview.ShapeableImageView;
 import com.google.firebase.firestore.DocumentReference;
@@ -41,9 +42,11 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 import java.util.UUID;
@@ -109,8 +112,13 @@ public class EditProfileActivity extends AppCompatActivity {
                         new DatePickerDialog.OnDateSetListener() {
                             @Override
                             public void onDateSet(DatePicker view, int selectedYear, int selectedMonth, int selectedDayOfMonth) {
-                                String selectedDate = selectedDayOfMonth + "/" + (selectedMonth + 1) + "/" + selectedYear;
-                                dateOfBirth.setText(selectedDate);
+                                Calendar selectedCalendar = Calendar.getInstance();
+                                selectedCalendar.set(selectedYear, selectedMonth, selectedDayOfMonth);
+
+                                SimpleDateFormat sdf = new SimpleDateFormat("MMM.dd.yyyy", Locale.getDefault());
+                                String formattedDate = sdf.format(selectedCalendar.getTime());
+
+                                dateOfBirth.setText(formattedDate);
                             }
                         },
                         year, month, dayOfMonth);
