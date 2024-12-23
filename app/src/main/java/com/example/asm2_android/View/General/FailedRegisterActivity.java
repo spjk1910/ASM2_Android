@@ -56,10 +56,11 @@ public class FailedRegisterActivity extends AppCompatActivity {
 
                 if (UserRoleEnum.DONORS.name().equals(userRole)) {
                     Intent  intent = new Intent(FailedRegisterActivity.this, DonorHomeActivity.class);
+                    startActivity(intent);
                 } else if (UserRoleEnum.SITE_MANAGERS.name().equals(userRole)) {
                     Intent intent = new Intent(FailedRegisterActivity.this, SiteManagerDonationActivity.class);
+                    startActivity(intent);
                 }
-                startActivity(intent);
                 finish();
             }
         });

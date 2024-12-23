@@ -448,9 +448,6 @@ public class DonorHomeActivity extends AppCompatActivity implements OnMapReadyCa
         int eventMonth = getMonthNumber(eventMonthStr);
         int startMonth = getMonthNumber(startMonthStr);
 
-        Log.d("DATE_PARSE","Event Year"+eventYear + "Start Year" + startYear);
-        Log.d("DATE_PARSE","Event Month"+eventMonth + "Start Month" + startMonth);
-        Log.d("DATE_PARSE","Event Day"+eventDay + "Start Day" + startDay);
 
         if (startYear > eventYear) {
             return true;

@@ -1,8 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
+    android:background="@color/white"
+    tools:context=".View.General.FinishedEventActivity">
 
     <ImageView
         android:id="@+id/ic_back"
@@ -182,7 +186,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/site_manager_name"
+                android:id="@+id/site_phone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -193,7 +197,7 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/update_button"
+            android:id="@+id/contact_button"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
@@ -213,5 +217,4 @@
         android:layout_height="50dp"
         android:background="@color/blood_orange"
         android:layout_alignParentBottom="true" />
-
 </RelativeLayout>

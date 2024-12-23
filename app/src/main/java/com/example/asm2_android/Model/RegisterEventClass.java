@@ -1,6 +1,7 @@
 package com.example.asm2_android.Model;
 
 public class RegisterEventClass {
+    String username;
     private String name;
     private String address;
     private String phone;
@@ -8,8 +9,12 @@ public class RegisterEventClass {
     private String gender;
     private String bloodType;
     private String weight;
+    private String eventID;
+    private String bloodVolumeDonate;
 
-    public RegisterEventClass(String name, String address, String phone, String dateOfBirth, String gender, String bloodType, String weight) {
+    public RegisterEventClass(String username,String name, String address, String phone, String dateOfBirth,
+                              String gender, String bloodType, String weight,String eventID, String bloodVolumeDonate) {
+        this.username = username;
         this.name = name;
         this.address = address;
         this.phone = phone;
@@ -17,6 +22,32 @@ public class RegisterEventClass {
         this.gender = gender;
         this.bloodType = bloodType;
         this.weight = weight;
+        this.eventID = eventID;
+        this.bloodVolumeDonate = bloodVolumeDonate;
+    }
+
+    public String getBloodVolumeDonate() {
+        return bloodVolumeDonate;
+    }
+
+    public void setBloodVolumeDonate(String bloodVolumeDonate) {
+        this.bloodVolumeDonate = bloodVolumeDonate;
+    }
+
+    public String getEventID() {
+        return eventID;
+    }
+
+    public void setEventID(String eventID) {
+        this.eventID = eventID;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getName() {

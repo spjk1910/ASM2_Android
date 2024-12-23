@@ -9,14 +9,14 @@ public class UserClass {
     private String password;
     private String phoneNumber;
     private String address;
-    private BloodEnum bloodType;
+    private String bloodType;
     private UserRoleEnum role;
     private String profileImage;
     private String birthday;
     private GenderEnum gender;
 
     public UserClass(String name, String email, String username, String password, String phoneNumber,
-                     String address, BloodEnum bloodType, UserRoleEnum role,String profileImage,String birthday, GenderEnum gender) {
+                     String address, String bloodType, UserRoleEnum role,String profileImage,String birthday, GenderEnum gender) {
         this.name = name;
         this.email = email;
         this.username = username;
@@ -102,11 +102,11 @@ public class UserClass {
         this.address = address;
     }
 
-    public BloodEnum getBloodType() {
+    public String getBloodType() {
         return bloodType;
     }
 
-    public void setBloodType(BloodEnum bloodType) {
+    public void setBloodType(String bloodType) {
         this.bloodType = bloodType;
     }
 

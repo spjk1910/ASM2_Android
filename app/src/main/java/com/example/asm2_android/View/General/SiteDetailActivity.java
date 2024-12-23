@@ -1,6 +1,5 @@
-package com.example.asm2_android.View.Donor;
+package com.example.asm2_android.View.General;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -14,11 +13,15 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 
 import com.example.asm2_android.R;
-import com.example.asm2_android.View.General.RegisterEventActivity;
+import com.example.asm2_android.View.Donor.DonorSiteDetailActivity;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -26,15 +29,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class DonorSiteDetailActivity extends AppCompatActivity {
+public class SiteDetailActivity extends AppCompatActivity {
     private ImageView backButton;
-    private Button registerButton;
     private List<String> bloodTypes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_donor_site_detail);
+        setContentView(R.layout.activity_site_detail);
         Objects.requireNonNull(getSupportActionBar()).hide();
         getWindow().getDecorView().setSystemUiVisibility(
                 View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
@@ -45,7 +47,6 @@ public class DonorSiteDetailActivity extends AppCompatActivity {
 
         String eventID = getIntent().getStringExtra("EVENT_ID");
         backButton = findViewById(R.id.ic_back);
-        registerButton = findViewById(R.id.register_button);
 
         if (eventID != null) {
             fetchEventDetails(eventID);
@@ -54,17 +55,6 @@ public class DonorSiteDetailActivity extends AppCompatActivity {
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
-            }
-        });
-
-        registerButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(DonorSiteDetailActivity.this, RegisterEventActivity.class);
-                intent.putExtra("EVENT_ID", eventID);
-                intent.putStringArrayListExtra("EVENT_BLOOD_TYPES", (ArrayList<String>) bloodTypes);
-                startActivity(intent);
                 finish();
             }
         });
