@@ -92,9 +92,9 @@ public class EventHistoryAdapter extends RecyclerView.Adapter<EventHistoryAdapte
                     if (position != RecyclerView.NO_POSITION) {
                         EventHistoryClass event = eventList.get(position);
                         Intent intent = new Intent(context, MapActivity.class);
-                        intent.putExtra("location", event.getLocation());
-                        intent.putExtra("latitude", event.getLatitude());
-                        intent.putExtra("longitude", event.getLongitude());
+                        intent.putExtra("LOCATION_NAME", event.getLocation());
+                        intent.putExtra("LATITUDE", event.getLatitude());
+                        intent.putExtra("LONGITUDE", event.getLongitude());
                         context.startActivity(intent);
                     }
                 }
