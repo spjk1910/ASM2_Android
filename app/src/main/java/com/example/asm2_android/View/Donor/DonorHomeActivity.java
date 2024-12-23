@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -100,7 +101,8 @@ public class DonorHomeActivity extends AppCompatActivity implements OnMapReadyCa
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setSelectedItemId(R.id.menu_donation);
 
-        String currentUser = getIntent().getStringExtra("CURRENT_USER");
+        SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
+        String currentUser = sharedPreferences.getString("USERNAME", null);
 
         search.addTextChangedListener(new TextWatcher() {
             @Override

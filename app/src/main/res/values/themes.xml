@@ -22,4 +22,8 @@
         <item name="android:activityOpenEnterAnimation">@anim/slider_in_right</item>
         <item name="android:activityOpenExitAnimation">@anim/slider_out_left</item>
     </style>
+    <style name="DialogAnimation">
+        <item name="android:windowEnterAnimation">@anim/slider_in_bottom</item>
+        <item name="android:windowExitAnimation">@anim/slider_out_bottom</item>
+    </style>
 </resources>

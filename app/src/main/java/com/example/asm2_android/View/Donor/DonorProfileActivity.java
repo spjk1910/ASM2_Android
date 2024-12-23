@@ -19,6 +19,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.bumptech.glide.Glide;
 import com.example.asm2_android.R;
+import com.example.asm2_android.View.General.AccountManagementActivity;
 import com.example.asm2_android.View.General.EditProfileActivity;
 import com.example.asm2_android.View.General.LoginActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -30,7 +31,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.Objects;
 
 public class DonorProfileActivity extends AppCompatActivity {
-    private LinearLayout edit_profile, log_out;
+    private LinearLayout edit_profile, log_out,account_management;
     private TextView name, username;
     private ShapeableImageView avatar;
 
@@ -63,6 +64,7 @@ public class DonorProfileActivity extends AppCompatActivity {
 
         edit_profile = findViewById(R.id.edit_profile);
         log_out = findViewById(R.id.log_out);
+        account_management = findViewById(R.id.account_management);
         name = findViewById(R.id.name);
         username = findViewById(R.id.username);
         avatar = findViewById(R.id.avatar);
@@ -88,6 +90,14 @@ public class DonorProfileActivity extends AppCompatActivity {
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(), LoginActivity.class));
                 finishAffinity();
+            }
+        });
+
+        account_management.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), AccountManagementActivity.class));
+                finish();
             }
         });
 

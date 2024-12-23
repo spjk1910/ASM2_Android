@@ -1,6 +1,7 @@
 [versions]
 agp = "8.7.1"
 android = "11.8.1"
+androidMailVersion = "1.6.0"
 androidVersion = "4.1.0"
 glideVersion = "4.14.2"
 junit = "4.13.2"
@@ -27,6 +28,8 @@ junit = { group = "junit", name = "junit", version.ref = "junit" }
 ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
 appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+mail-android-activation = { module = "com.sun.mail:android-activation", version.ref = "androidMailVersion" }
+mail-android-mail = { module = "com.sun.mail:android-mail", version.ref = "androidMailVersion" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
 constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }

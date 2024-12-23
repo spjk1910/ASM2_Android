@@ -1,10 +1,193 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".View.General.AccountManagementActivity">
+    tools:context=".View.General.AccountManagementActivity"
+    android:background="@color/white">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <RelativeLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/ic_back"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@drawable/ic_back"
+            android:layout_alignParentStart="true"
+            android:layout_margin="20dp"
+            app:tint="@color/black" />
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Account Management"
+            android:textColor="@color/black"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="16dp"/>
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/account_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Account"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_below="@id/header"
+        android:layout_marginStart="20dp"/>
+    
+    <LinearLayout
+        android:id="@+id/account_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/account_title"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp">
+        
+       <RelativeLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content">
+           
+           <TextView
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="Username"
+               android:layout_alignParentStart="true"
+               android:textColor="@color/black"
+               android:textSize="18sp"/>
+
+           <TextView
+               android:id="@+id/username"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:maxWidth="180dp"
+               android:text="spjk_ryan"
+               android:textColor="@color/grey"
+               android:layout_alignParentEnd="true"
+               android:drawablePadding="10dp"
+               android:textSize="18sp"/>
+       </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Email"
+                android:layout_alignParentStart="true"
+                android:singleLine="false"
+                android:textColor="@color/black"
+                android:textSize="18sp"/>
+
+            <TextView
+                android:id="@+id/email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="spjk1910@gmail.com"
+                android:maxWidth="180dp"
+                android:singleLine="false"
+                android:textColor="@color/black"
+                android:layout_alignParentEnd="true"
+                android:clickable="true"
+                android:textSize="18sp"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Password"
+                android:layout_alignParentStart="true"
+                android:textColor="@color/black"
+                android:textSize="18sp"/>
+
+            <EditText
+                android:id="@+id/password"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxWidth="180dp"
+                android:text="19102020"
+                android:clickable="true"
+                android:inputType="textPassword"
+                android:singleLine="false"
+                android:textColor="@color/black"
+                android:layout_alignParentEnd="true"
+                android:textSize="18sp"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:background="@android:color/transparent"/>
+        </RelativeLayout>
+    </LinearLayout>
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="380dp"
+        android:layout_below="@+id/account_info"
+        android:layout_height="1dp"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
+        android:background="@color/black" />
+
+    <TextView
+        android:id="@+id/delete_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Delete Account"
+        android:textColor="@color/red"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/divider"
+        android:layout_marginStart="20dp"/>
+
+    <TextView
+        android:id="@+id/notification"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Once you delete your account, there is no going back. Please be certain!"
+        android:layout_below="@id/delete_title"
+        android:layout_alignParentStart="true"
+        android:textColor="@color/black"
+        android:singleLine="false"
+        android:textAlignment="textStart"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="20dp"
+        android:textSize="18sp"/>
+
+    <TextView
+        android:id="@+id/delete_account"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Delete your account"
+        android:layout_below="@id/notification"
+        android:drawableStart="@drawable/ic_delete"
+        android:drawableTint="@color/red"
+        android:drawablePadding="5dp"
+        android:layout_alignParentStart="true"
+        android:textColor="@color/red"
+        android:singleLine="false"
+        android:textAlignment="textStart"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="20dp"
+        android:textSize="18sp"/>
+
+</RelativeLayout>

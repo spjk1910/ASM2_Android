@@ -34,6 +34,12 @@ android {
     buildFeatures {
         viewBinding = true
     }
+    packaging {
+        resources {
+            excludes += "META-INF/NOTICE.md"
+            excludes += "META-INF/LICENSE.md"
+        }
+    }
 }
 
 dependencies {
@@ -48,6 +54,8 @@ dependencies {
     implementation(libs.play.services.maps)
     implementation(libs.play.services.location)
     implementation(libs.places)
+    implementation (libs.mail.android.mail)
+    implementation (libs.mail.android.activation)
     annotationProcessor (libs.github.compiler)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)

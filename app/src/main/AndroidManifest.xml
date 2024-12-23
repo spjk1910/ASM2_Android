@@ -23,6 +23,12 @@
         android:theme="@style/Theme.ASM2_Android"
         tools:targetApi="31">
         <activity
+            android:name=".View.General.ResetPasswordNotificationActivity"
+            android:exported="false" />
+        <activity
+            android:name=".View.General.ResetPasswordActivity"
+            android:exported="false" />
+        <activity
             android:name=".View.General.AccountManagementActivity"
             android:exported="false" />
         <activity
