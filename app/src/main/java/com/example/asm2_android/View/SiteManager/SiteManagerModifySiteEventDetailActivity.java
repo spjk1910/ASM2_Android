@@ -29,6 +29,7 @@ import androidx.core.content.ContextCompat;
 import com.example.asm2_android.Model.EventDetailClass;
 import com.example.asm2_android.R;
 import com.example.asm2_android.View.General.ChooseLocationActivity;
+import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -300,6 +301,7 @@ public class SiteManagerModifySiteEventDetailActivity extends AppCompatActivity 
                             longitudeHolder.setText(String.valueOf(longitude));
                             eventLocation.setText(locationName);
                         }
+
                     }
                 }
         );
@@ -320,10 +322,19 @@ public class SiteManagerModifySiteEventDetailActivity extends AppCompatActivity 
                                     Map<String, Object> updatedFields = new HashMap<>();
                                     TextView latitudeHolder = findViewById(R.id.latitude_holder);
                                     TextView longitudeHolder = findViewById(R.id.longitude_holder);
-                                    if (latitudeHolder != null && longitudeHolder != null) {
-                                        updatedFields.put("latitude", Double.parseDouble(latitudeHolder.getText().toString()));
-                                        updatedFields.put("longitude", Double.parseDouble(longitudeHolder.getText().toString()));
+                                    if (latitudeHolder != null && longitudeHolder != null
+                                            && !latitudeHolder.getText().toString().trim().isEmpty()
+                                            && !longitudeHolder.getText().toString().trim().isEmpty()) {
+                                        try {
+                                            updatedFields.put("latitude", Double.parseDouble(latitudeHolder.getText().toString().trim()));
+                                            updatedFields.put("longitude", Double.parseDouble(longitudeHolder.getText().toString().trim()));
+                                        } catch (NumberFormatException e) {
+                                            Toast.makeText(SiteManagerModifySiteEventDetailActivity.this, "Invalid latitude or longitude value. Please enter valid numbers.", Toast.LENGTH_SHORT).show();
+                                        }
+                                    } else {
+                                       // Toast.makeText(SiteManagerModifySiteEventDetailActivity.this, "Latitude or longitude cannot be empty.", Toast.LENGTH_SHORT).show();
                                     }
+
 
                                     updatedFields.put("eventName", eventName.getText().toString());
                                     updatedFields.put("contact", contactNumber.getText().toString());
@@ -345,6 +356,7 @@ public class SiteManagerModifySiteEventDetailActivity extends AppCompatActivity 
                                             .update(updatedFields)
                                             .addOnSuccessListener(aVoid -> {
                                                 Toast.makeText(getApplicationContext(), "User updated successfully", Toast.LENGTH_SHORT).show();
+                                                storeNotification(db, eventDetail.getEventID());
                                             })
                                             .addOnFailureListener(e -> {
                                                 Toast.makeText(getApplicationContext(), "Error updating user: " + e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -359,9 +371,47 @@ public class SiteManagerModifySiteEventDetailActivity extends AppCompatActivity 
                         .addOnFailureListener(e -> {
                             Toast.makeText(getApplicationContext(), "Error fetching event document: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                         });
+
+
             }
         });
     }
+    private void storeNotification(FirebaseFirestore db, String eventID) {
+        db.collection("registers")
+                .whereEqualTo("eventID", eventID)
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        for (DocumentSnapshot document : task.getResult()) {
+                            String username = document.getString("username");
+
+                            if (username != null) {
+                                Map<String, Object> notificationData = new HashMap<>();
+                                notificationData.put("content", "Event Detail of your Registration: " + eventID + " has been Updated!");
+                                notificationData.put("eventID", eventID);
+                                notificationData.put("username", username);
+                                notificationData.put("time", Timestamp.now());
+
+                                db.collection("notifications")
+                                        .add(notificationData)
+                                        .addOnSuccessListener(documentReference -> {
+                                            Log.d("NOTIFICATION", "Notification stored for user: " + username + " with ID: " + documentReference.getId());
+                                        })
+                                        .addOnFailureListener(e -> {
+                                            Log.w("NOTIFICATION", "Error adding notification for user: " + username, e);
+                                        });
+                            }
+                        }
+                    } else {
+                        Log.w("REGISTERS_ERROR", "Error fetching registers: ", task.getException());
+                    }
+                })
+                .addOnFailureListener(e -> {
+                    Log.w("REGISTERS_ERROR", "Error fetching registers: ", e);
+                });
+    }
+
+
     private void setDatatoView(EventDetailClass eventDetail) {
         eventName = findViewById(R.id.event_name);
         eventName.setText(eventDetail.getEventName());

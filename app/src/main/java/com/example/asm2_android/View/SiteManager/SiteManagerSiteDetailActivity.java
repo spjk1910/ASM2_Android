@@ -18,6 +18,8 @@ import androidx.core.content.ContextCompat;
 
 import com.example.asm2_android.Model.EventDetailClass;
 import com.example.asm2_android.R;
+import com.example.asm2_android.View.General.ListOfDonorActivity;
+import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -70,12 +72,14 @@ public class SiteManagerSiteDetailActivity extends AppCompatActivity {
 
                 eventRef.update(updates)
                         .addOnSuccessListener(aVoid -> {
+                            storeNotification(db, eventDetail.getEventID());
                             Log.d("Firestore", "Event updated successfully!");
                         })
                         .addOnFailureListener(e -> {
                             Log.w("Firestore", "Error updating event", e);
                         });
                 Toast.makeText(SiteManagerSiteDetailActivity.this, "Event is CLOSED!", Toast.LENGTH_SHORT).show();
+
                 finish();
             }
         });
@@ -99,10 +103,49 @@ public class SiteManagerSiteDetailActivity extends AppCompatActivity {
         downloadDonorInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(SiteManagerSiteDetailActivity.this, ListOfDonorActivity.class);
+                intent.putExtra("EVENT_ID", eventDetail.getEventID());
+                intent.putExtra("EVENT_NAME",eventDetail.getEventName());
+                startActivity(intent);
             }
         });
     }
+
+    private void storeNotification(FirebaseFirestore db, String eventID) {
+        db.collection("registers")
+                .whereEqualTo("eventID", eventID)
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        for (DocumentSnapshot document : task.getResult()) {
+                            String username = document.getString("username");
+
+                            if (username != null) {
+                                Map<String, Object> notificationData = new HashMap<>();
+                                notificationData.put("content", eventID + " Event has been Closed!");
+                                notificationData.put("eventID", eventID);
+                                notificationData.put("username", username);
+                                notificationData.put("time", Timestamp.now());
+
+                                db.collection("notifications")
+                                        .add(notificationData)
+                                        .addOnSuccessListener(documentReference -> {
+                                            Log.d("NOTIFICATION", "Notification stored for user: " + username + " with ID: " + documentReference.getId());
+                                        })
+                                        .addOnFailureListener(e -> {
+                                            Log.w("NOTIFICATION", "Error adding notification for user: " + username, e);
+                                        });
+                            }
+                        }
+                    } else {
+                        Log.w("REGISTERS_ERROR", "Error fetching registers: ", task.getException());
+                    }
+                })
+                .addOnFailureListener(e -> {
+                    Log.w("REGISTERS_ERROR", "Error fetching registers: ", e);
+                });
+    }
+
     private void setDatatoView(EventDetailClass eventDetail) {
         eventName = findViewById(R.id.event_name);
         eventName.setText(eventDetail.getEventName());

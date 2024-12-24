@@ -3,7 +3,6 @@ package com.example.asm2_android.View.SiteManager;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -11,20 +10,17 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import com.example.asm2_android.Model.EventDetailClass;
 import com.example.asm2_android.R;
-import com.google.firebase.firestore.DocumentReference;
+import com.example.asm2_android.View.General.ListOfDonorActivity;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 
 public class SiteManagerDetailFinishedActivity extends AppCompatActivity {
@@ -66,7 +62,10 @@ public class SiteManagerDetailFinishedActivity extends AppCompatActivity {
         downloadDonorInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(SiteManagerDetailFinishedActivity.this, ListOfDonorActivity.class);
+                intent.putExtra("EVENT_ID", eventDetail.getEventID());
+                intent.putExtra("EVENT_NAME",eventDetail.getEventName());
+                startActivity(intent);
             }
         });
     }

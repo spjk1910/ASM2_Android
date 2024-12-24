@@ -1,7 +1,9 @@
 package com.example.asm2_android.View.SiteManager;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import androidx.activity.EdgeToEdge;
@@ -9,13 +11,27 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.asm2_android.Controller.NotificationAdapter;
+import com.example.asm2_android.Model.NotificationClass;
 import com.example.asm2_android.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.Timestamp;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 import java.util.Objects;
 
 public class SiteManagerNotificationActivity extends AppCompatActivity {
+    private RecyclerView notification;
+    private NotificationAdapter notificationAdapter;
+    private ArrayList<NotificationClass> notificationList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +44,17 @@ public class SiteManagerNotificationActivity extends AppCompatActivity {
                         | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                         | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
         );
+
+        SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
+        String currentUser = sharedPreferences.getString("USERNAME", null);
+
+        notification = findViewById(R.id.notification);
+        notification.setLayoutManager(new LinearLayoutManager(this));
+        notificationList = new ArrayList<>();
+        notificationAdapter = new NotificationAdapter(this, notificationList);
+        notification.setAdapter(notificationAdapter);
+
+        loadNotification(currentUser);
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setSelectedItemId(R.id.menu_notification);
@@ -57,6 +84,37 @@ public class SiteManagerNotificationActivity extends AppCompatActivity {
             }
             return false;
         });
+    }
+
+    private void loadNotification(String username) {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("notifications")
+                .whereEqualTo("username", username)
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            String content = document.getString("content");
+                            Timestamp time = document.getTimestamp("time");
+                            String eventID = document.getString("eventID");
+
+                            if (time != null) {
+                                Date date = time.toDate();
+                                SimpleDateFormat sdf = new SimpleDateFormat("h:mm a", Locale.getDefault());
+                                String formattedDate = sdf.format(date);
+
+                                Log.d("TIME_CHECK", "Time: " + formattedDate);
+
+                                NotificationClass notificationClass = new NotificationClass(formattedDate, content,eventID);
+
+                                notificationList.add(notificationClass);
+                                notificationAdapter.notifyDataSetChanged();
+                            }
+                        }
+                    } else {
+                        Log.w("NOTIFICATION_ERROR", "Error getting notifications: ", task.getException());
+                    }
+                });
     }
 
     @Override

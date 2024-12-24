@@ -10,11 +10,13 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.asm2_android.Model.GenderEnum;
 import com.example.asm2_android.Model.UserClass;
 import com.example.asm2_android.Model.UserRoleEnum;
 import com.example.asm2_android.R;
@@ -22,6 +24,7 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.Arrays;
 import java.util.Objects;
 
 public class RegisterActivity extends AppCompatActivity {
@@ -30,7 +33,7 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText registerName,registerEmail, registerPassword,registerUsername;
     private ImageView passwordVisibility, closeAboutUs, aboutUsButton;
     private Button signUpButton;
-    private TextView redirectSignIn,aboutUsEmail;
+    private TextView redirectSignIn,aboutUsEmail,roleSelection;
     private Dialog aboutUs;
     private boolean isPasswordVisible = false;
 
@@ -58,6 +61,26 @@ public class RegisterActivity extends AppCompatActivity {
         registerPassword = findViewById(R.id.register_password);
         registerUsername = findViewById(R.id.register_username);
         aboutUsButton = findViewById(R.id.about_us_button);
+        roleSelection = findViewById(R.id.register_user_role);
+
+        String[] roleOptions = Arrays.stream(UserRoleEnum.values())
+                .map(Enum::name)
+                .filter(role -> !role.equals("SUPER_USERS"))  // Filter out "SUPER_USERS"
+                .toArray(String[]::new);
+
+        roleSelection.setOnClickListener(v -> {
+            PopupMenu popupMenu = new PopupMenu(this, roleSelection);
+            for (String role : roleOptions) {
+                popupMenu.getMenu().add(role);
+            }
+
+            // Set item click listener for the popup menu
+            popupMenu.setOnMenuItemClickListener(item -> {
+                roleSelection.setText(item.getTitle());
+                return true;
+            });
+            popupMenu.show();
+        });
 
         signUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -189,7 +212,10 @@ public class RegisterActivity extends AppCompatActivity {
         String name = registerName.getText().toString();
         String password = registerPassword.getText().toString();
 
-        UserClass newUser = new UserClass(name, email, username, password, null, null, null, UserRoleEnum.DONORS, null, null, null);
+        String selectedRole = roleSelection.getText().toString();
+        UserRoleEnum role = UserRoleEnum.valueOf(selectedRole);
+
+        UserClass newUser = new UserClass(name, email, username, password, null, null, null, role, null, null, null);
 
         showLoadingScreen();
 

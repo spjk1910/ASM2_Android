@@ -113,6 +113,26 @@
                     android:src="@drawable/ic_eye_closed"/>
             </RelativeLayout>
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="20dp">
+
+                <TextView
+                    android:id="@+id/register_user_role"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/register_border"
+                    android:padding="8dp"
+                    android:drawableStart="@drawable/ic_account"
+                    android:drawablePadding="8dp"
+                    android:focusable="false"
+                    android:clickable="true"
+                    android:hint="Choose your role"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/grey" />
+            </RelativeLayout>
+
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="60dp"

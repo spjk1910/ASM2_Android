@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@drawable/notification_item_bg">
+    android:layout_height="wrap_content">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@drawable/notification_item_bg">
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/image"
@@ -34,7 +34,7 @@
 
         <TextView
             android:id="@+id/notification_time"
-            android:layout_below="@+id/notification_content"
+            android:layout_below="@id/notification_content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/notification_content"

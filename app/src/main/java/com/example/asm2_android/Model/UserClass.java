@@ -16,7 +16,7 @@ public class UserClass {
     private GenderEnum gender;
 
     public UserClass(String name, String email, String username, String password, String phoneNumber,
-                     String address, String bloodType, UserRoleEnum role,String profileImage,String birthday, GenderEnum gender) {
+                     String address, String bloodType, UserRoleEnum role, String profileImage, String birthday, GenderEnum gender) {
         this.name = name;
         this.email = email;
         this.username = username;

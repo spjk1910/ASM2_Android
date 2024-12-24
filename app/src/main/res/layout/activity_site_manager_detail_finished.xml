@@ -576,7 +576,7 @@
                 android:id="@+id/download_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Download List of Donors"
+                android:text="Fetch List of Donors"
                 android:textColor="@color/white"
                 android:textSize="16sp"
                 app:backgroundTint="@color/vibrant_pink"

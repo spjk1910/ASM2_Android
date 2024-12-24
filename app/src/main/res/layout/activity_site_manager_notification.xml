@@ -9,6 +9,7 @@
     tools:context=".View.SiteManager.SiteManagerNotificationActivity">
 
     <TextView
+        android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Notification"
@@ -18,56 +19,14 @@
         android:layout_marginTop="20dp"
         android:textSize="24sp" />
 
-    <TextView
-        android:id="@+id/markAllReadButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="23dp"
-        android:layout_marginRight="20dp"
-        android:text="Mark all as read"
-        android:textColor="@color/red"
-        android:textSize="20sp"
-        android:textStyle="normal" />
-
-    <View
-        android:id="@+id/bottomDivider"
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:layout_below="@id/tabLayout"
-        android:background="@color/black" />
-
-
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tabLayout"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/markAllReadButton"
-        android:background="@color/white"
-        app:tabIndicatorColor="@color/red"
-        app:tabIndicatorHeight="2dp"
-        app:tabTextColor="@color/black"
-        app:tabSelectedTextColor="@color/red"
-        android:elevation="0dp" >
-
-        <com.google.android.material.tabs.TabItem
-            android:id="@+id/tabAll"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="All" />
-
-        <com.google.android.material.tabs.TabItem
-            android:id="@+id/tabUnread"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Unread" />
-    </com.google.android.material.tabs.TabLayout>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/notification"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="10dp"
-        android:layout_below="@id/bottomDivider"/>
+        android:layout_above="@id/bottom_navigation"
+        android:layout_below="@id/title"/>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:layout_width="match_parent"
