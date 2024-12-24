@@ -282,7 +282,7 @@ public class LoginActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("USERNAME", currentUser);
-        editor.putString("userRole", String.valueOf(currentRole));
+        editor.putString("USER_ROLE", currentRole.name());
         editor.apply();
         Log.d("Current User", currentUser);
         startActivity(intent);

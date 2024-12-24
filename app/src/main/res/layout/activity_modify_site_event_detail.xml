@@ -57,6 +57,7 @@
                     android:id="@+id/blood_type_list"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:clickable="true"
                     android:orientation="vertical"
                     android:gravity="center_horizontal">
 
@@ -127,7 +128,7 @@
                             android:textSize="20sp"
                             android:textColor="@color/black"/>
 
-                        <TextView
+                        <EditText
                             android:id="@+id/event_name"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -163,7 +164,6 @@
                             android:textColor="@color/black"/>
 
                         <TextView
-
                             android:id="@+id/site_manager_name"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -198,7 +198,7 @@
                             android:textSize="20sp"
                             android:textColor="@color/black"/>
 
-                        <TextView
+                        <EditText
                             android:maxWidth="180dp"
                             android:textAlignment="textEnd"
                             android:id="@+id/contact_number"
@@ -238,6 +238,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:maxWidth="180dp"
+                            android:clickable="true"
                             android:textAlignment="textEnd"
                             android:text="AGS Hospital, Moolakulam"
                             android:singleLine="false"
@@ -275,6 +276,7 @@
                             android:layout_height="wrap_content"
                             android:maxWidth="180dp"
                             android:textAlignment="textEnd"
+                            android:clickable="true"
                             android:text="Dec.21.2024"
                             android:singleLine="false"
                             android:layout_marginTop="10dp"
@@ -543,7 +545,7 @@
                         android:textColor="@color/black"
                         android:textSize="20sp"/>
 
-                    <TextView
+                    <EditText
                         android:id="@+id/event_mission"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -567,43 +569,26 @@
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp">
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <Button
-                    android:id="@+id/end_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="End Event"
-                    android:textColor="@color/white"
-                    android:drawableStart="@drawable/ic_close"
-                    android:textSize="16sp"
-                    app:backgroundTint="@color/red"
-                    app:cornerRadius="20dp"/>
-
-                <Button
-                    android:id="@+id/modify_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Modify"
-                    android:layout_marginStart="10dp"
-                    android:textColor="@color/white"
-                    android:textSize="16sp"
-                    app:backgroundTint="@color/vibrant_pink"
-                    app:cornerRadius="20dp"/>
-            </LinearLayout>
-
             <Button
-                android:id="@+id/download_button"
+                android:id="@+id/update_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Download List of Donors"
+                android:text="Update"
                 android:textColor="@color/white"
                 android:textSize="16sp"
                 app:backgroundTint="@color/vibrant_pink"
                 app:cornerRadius="20dp"/>
         </LinearLayout>
     </RelativeLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="invisible"
+        android:id="@+id/latitude_holder"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="invisible"
+        android:id="@+id/longitude_holder"/>
 </RelativeLayout>

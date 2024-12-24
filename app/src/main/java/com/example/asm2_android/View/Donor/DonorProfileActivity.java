@@ -97,7 +97,6 @@ public class DonorProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getApplicationContext(), AccountManagementActivity.class));
-                finish();
             }
         });
 

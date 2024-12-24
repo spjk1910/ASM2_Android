@@ -27,9 +27,12 @@ import com.bumptech.glide.Glide;
 import com.example.asm2_android.Model.BloodVolumeEnum;
 import com.example.asm2_android.Model.GenderEnum;
 import com.example.asm2_android.Model.RegisterEventClass;
+import com.example.asm2_android.Model.UserRoleEnum;
 import com.example.asm2_android.R;
 import com.example.asm2_android.View.Donor.DonorHistoryActivity;
 import com.example.asm2_android.View.Donor.DonorHomeActivity;
+import com.example.asm2_android.View.SiteManager.SiteManagerDonationActivity;
+import com.example.asm2_android.View.SiteManager.SiteManagerRegisterDonationActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.imageview.ShapeableImageView;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -75,6 +78,8 @@ public class RegisterEventActivity extends AppCompatActivity {
 
         SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
         String currentUser = sharedPreferences.getString("USERNAME", null);
+        String userRoleString = sharedPreferences.getString("USER_ROLE", null);
+        UserRoleEnum userRole = UserRoleEnum.valueOf(userRoleString);
         String eventID = getIntent().getStringExtra("EVENT_ID");
         List<String> eventBloodTypes = getIntent().getStringArrayListExtra("EVENT_BLOOD_TYPES");
 
@@ -207,10 +212,19 @@ public class RegisterEventActivity extends AppCompatActivity {
 
                     if (!eventBloodTypes.contains(selectedBloodType)) {
                         Toast.makeText(RegisterEventActivity.this,"Thank you, but this event doesn’t need the blood type you selected!",Toast.LENGTH_SHORT).show();
-                        Intent failedIntent = new Intent(RegisterEventActivity.this, DonorHomeActivity.class);
-                        startActivity(failedIntent);
-                        finish();
-                        return;
+
+                        Intent failedIntent;
+                        if (userRole == UserRoleEnum.DONORS) {
+                            failedIntent = new Intent(RegisterEventActivity.this, DonorHomeActivity.class);
+                            startActivity(failedIntent);
+                            finish();
+                            return;
+                        } else if (userRole == UserRoleEnum.SITE_MANAGERS) {
+                            failedIntent = new Intent(RegisterEventActivity.this, SiteManagerRegisterDonationActivity.class);
+                            startActivity(failedIntent);
+                            finish();
+                            return;
+                        }
                     }
 
                     if (age < 18 || age > 65) {
@@ -239,9 +253,19 @@ public class RegisterEventActivity extends AppCompatActivity {
                                 .addOnCompleteListener(task -> {
                                     if (task.isSuccessful()) {
                                         Toast.makeText(RegisterEventActivity.this, "Thank you for your registration in event!", Toast.LENGTH_SHORT).show();
-                                        Intent donationIntent = new Intent(RegisterEventActivity.this, DonorHistoryActivity.class);
-                                        startActivity(donationIntent);
-                                        finish();
+
+                                        Intent donationIntent;
+                                        if (userRole == UserRoleEnum.DONORS) {
+                                            donationIntent = new Intent(RegisterEventActivity.this, DonorHistoryActivity.class);
+                                            startActivity(donationIntent);
+                                            finish();
+                                            return;
+                                        } else if (userRole == UserRoleEnum.SITE_MANAGERS) {
+                                            donationIntent = new Intent(RegisterEventActivity.this, SiteManagerDonationActivity.class);
+                                            startActivity(donationIntent);
+                                            finish();
+                                            return;
+                                        }
                                     } else {
                                         Log.d("RegisterEventActivity", "Error: " + task.getException());
                                         Toast.makeText(RegisterEventActivity.this, "Error: " + task.getException(), Toast.LENGTH_SHORT).show();

@@ -27,17 +27,17 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-public class SiteManagerSiteDetailActivity extends AppCompatActivity {
+public class SiteManagerDetailFinishedActivity extends AppCompatActivity {
     private TextView eventName,siteManagerName,contactNumber,eventLocation,
             eventDateStart,eventBloodAmount,bloodAPlus,bloodBPlus,bloodABPlus,
             bloodOPlus,bloodBMinus,bloodABMinus,bloodAMinus,bloodOMinus,eventMission;
     private ImageView backButton;
-    private Button endEvent,editEvent,downloadDonorInfo;
+    private Button downloadDonorInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_site_manager_site_detail);
+        setContentView(R.layout.activity_site_manager_detail_finished);
         Objects.requireNonNull(getSupportActionBar()).hide();
         getWindow().getDecorView().setSystemUiVisibility(
                 View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
@@ -52,42 +52,9 @@ public class SiteManagerSiteDetailActivity extends AppCompatActivity {
             setDatatoView(eventDetail);
         }
 
-        endEvent = findViewById(R.id.end_button);
-        editEvent = findViewById(R.id.modify_button);
         downloadDonorInfo = findViewById(R.id.download_button);
         backButton = findViewById(R.id.ic_back);
 
-        endEvent.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FirebaseFirestore db = FirebaseFirestore.getInstance();
-
-                String eventID = eventDetail.getEventID();
-                DocumentReference eventRef = db.collection("events").document(eventID);
-
-                Map<String, Object> updates = new HashMap<>();
-                updates.put("open", false);
-
-                eventRef.update(updates)
-                        .addOnSuccessListener(aVoid -> {
-                            Log.d("Firestore", "Event updated successfully!");
-                        })
-                        .addOnFailureListener(e -> {
-                            Log.w("Firestore", "Error updating event", e);
-                        });
-                Toast.makeText(SiteManagerSiteDetailActivity.this, "Event is CLOSED!", Toast.LENGTH_SHORT).show();
-                finish();
-            }
-        });
-
-        editEvent.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(SiteManagerSiteDetailActivity.this, SiteManagerModifySiteEventDetailActivity.class);
-                intent.putExtra("EVENT_DETAIL", eventDetail);
-                startActivity(intent);
-            }
-        });
 
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override

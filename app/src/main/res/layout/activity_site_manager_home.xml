@@ -30,7 +30,6 @@
             android:layout_below="@id/tabLayout"
             android:background="@color/black" />
 
-
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabLayout"
             android:layout_width="300dp"
@@ -41,7 +40,7 @@
             app:tabIndicatorHeight="2dp"
             app:tabTextColor="@color/black"
             app:tabSelectedTextColor="@color/red"
-            android:elevation="0dp" >
+            android:elevation="0dp">
 
             <com.google.android.material.tabs.TabItem
                 android:id="@+id/upcoming_tab"
@@ -53,21 +52,19 @@
                 android:id="@+id/completed_tab"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="310dp"
                 android:text="Completed" />
         </com.google.android.material.tabs.TabLayout>
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/eventManagementRecyclerView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="620dp"
             android:padding="10dp"
-            android:layout_below="@id/bottomDivider"/>
+            android:layout_below="@id/bottomDivider"
+           />
 
     </RelativeLayout>
-
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/frame_layout"/>
 
     <com.google.android.material.bottomappbar.BottomAppBar
         android:layout_width="match_parent"
@@ -90,7 +87,7 @@
             app:itemTextColor="@drawable/item_selector"
             app:itemRippleColor="@android:color/transparent"
             android:background="@android:color/transparent"
-            app:menu="@menu/site_manager_bottom_menu"/>
+            app:menu="@menu/site_manager_bottom_menu" />
 
     </com.google.android.material.bottomappbar.BottomAppBar>
 
@@ -102,6 +99,6 @@
         android:src="@drawable/ic_add"
         app:layout_anchor="@id/bottomAppBar"
         app:maxImageSize="40dp"
-        app:tint ="@drawable/item_selector"/>
+        app:tint="@drawable/item_selector" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -66,8 +66,10 @@ public class FailedRegisterActivity extends AppCompatActivity {
         });
     }
     private String getUserRole() {
-        SharedPreferences prefs = getSharedPreferences("UserPrefs", MODE_PRIVATE);
-        return prefs.getString("userRole", "");
+        SharedPreferences sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE);
+        String userRoleString = sharedPreferences.getString("USER_ROLE", null);
+        UserRoleEnum userRole = UserRoleEnum.valueOf(userRoleString);
+        return userRole.name();
     }
 
 
