@@ -2,29 +2,19 @@ package com.example.asm2_android.View.SiteManager;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.location.Address;
-import android.location.Geocoder;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.asm2_android.Controller.AddEventListAdapter;
 import com.example.asm2_android.Controller.AddEventListFinishedAdapter;
-import com.example.asm2_android.Controller.EventHistoryAdapter;
-import com.example.asm2_android.Controller.EventHistoryFinishedAdapter;
 import com.example.asm2_android.Model.BloodTypeDetails;
 import com.example.asm2_android.Model.EventDetailClass;
-import com.example.asm2_android.Model.EventHistoryClass;
 import com.example.asm2_android.R;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
@@ -34,15 +24,10 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
@@ -126,7 +111,7 @@ public class SiteManagerHomeActivity extends AppCompatActivity {
                 finish();
                 return true;
             } else if (itemId == R.id.menu_notification) {
-                Intent intent = new Intent(getApplicationContext(), SiteManagerNotificationActivity.class);
+                Intent intent = new Intent(getApplicationContext(), SiteManagerProfileActivity.SiteManagerNotificationActivity.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slider_in_right, R.anim.slider_out_left);
                 finish();

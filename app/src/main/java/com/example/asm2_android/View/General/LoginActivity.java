@@ -33,7 +33,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText loginUsername, loginPassword;
     private ImageView passwordVisibility, closeAboutUs, aboutUsButton;
     private Button signInButton;
-    private TextView redirectSignUp, aboutUsEmail;
+    private TextView redirectSignUp, aboutUsEmail,forgotPassword;
     private Dialog aboutUs;
     private boolean isPasswordVisible = false;
 
@@ -57,6 +57,7 @@ public class LoginActivity extends AppCompatActivity {
         loginUsername = findViewById(R.id.register_username);
         loginPassword = findViewById(R.id.register_password);
         aboutUsButton = findViewById(R.id.about_us_button);
+        forgotPassword = findViewById(R.id.forgot_password);
 
         aboutUs = new Dialog(this);
         aboutUs.setContentView(R.layout.about_us_sheet);
@@ -64,9 +65,15 @@ public class LoginActivity extends AppCompatActivity {
         aboutUs.getWindow().setBackgroundDrawable(getDrawable(R.drawable.about_us_sheet_bg));
         aboutUs.setCancelable(false);
         aboutUsEmail = aboutUs.findViewById(R.id.email);
-
-
         closeAboutUs = aboutUs.findViewById(R.id.close_filter);
+
+        forgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, ResetPasswordActivity.class);
+                startActivity(intent);
+            }
+        });
 
         closeAboutUs.setOnClickListener(new View.OnClickListener() {
             @Override

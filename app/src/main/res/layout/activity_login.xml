@@ -86,6 +86,16 @@
             android:src="@drawable/ic_eye_closed"/>
       </RelativeLayout>
 
+      <TextView
+          android:id="@+id/forgot_password"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="Forgot Password? "
+          android:textStyle="italic"
+          android:layout_marginStart="145dp"
+          android:textSize="18sp"
+          android:textColor="@color/black"/>
+
       <Button
           android:layout_width="match_parent"
           android:layout_height="60dp"

@@ -497,5 +497,4 @@ public class DonorHomeActivity extends AppCompatActivity implements OnMapReadyCa
         }
         return bitmap;
     }
-
 }

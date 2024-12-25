@@ -24,19 +24,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.res.ResourcesCompat;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import com.example.asm2_android.Model.CustomInfoMarkerClass;
 import com.example.asm2_android.Model.CustomInfoWindowAdapter;
 import com.example.asm2_android.R;
-import com.example.asm2_android.View.Donor.DonorHomeActivity;
 import com.example.asm2_android.View.Donor.DonorSiteDetailActivity;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -189,7 +184,7 @@ public class SiteManagerRegisterDonationActivity extends AppCompatActivity imple
             } else if (itemId == R.id.menu_donation) {
                 return true;
             } else if (itemId == R.id.menu_notification) {
-                Intent intent = new Intent(getApplicationContext(), SiteManagerNotificationActivity.class);
+                Intent intent = new Intent(getApplicationContext(), SiteManagerProfileActivity.SiteManagerNotificationActivity.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.slider_in_right, R.anim.slider_out_left);
                 finish();

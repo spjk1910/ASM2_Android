@@ -1,0 +1,610 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".View.SuperUser.SuperUserReportActivity"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:id="@+id/linear"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/event_detail_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/ic_back"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/ic_back"
+                android:layout_alignParentStart="true"
+                android:layout_margin="20dp"
+                app:tint="@color/black" />
+
+            <TextView
+                android:id="@+id/donation_site_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Donation Detail Report"
+                android:textColor="@color/black"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                android:layout_centerHorizontal="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="16dp"/>
+
+            <ImageView
+                android:id="@+id/download_button"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/ic_download"
+                android:layout_alignParentEnd="true"
+                android:layout_margin="20dp"
+                app:tint="@color/black" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/event_detail_body"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/event_detail_header">
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/event_detail_header"
+                android:layout_marginTop="30dp"
+                tools:ignore="NotSibling">
+
+                <RelativeLayout
+                    android:id="@+id/event_detail_content"
+                    android:background="@color/white"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:id="@+id/blood_type_list"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:gravity="center_horizontal">
+
+                        <LinearLayout
+                            android:id="@+id/blood_type_list_top"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_horizontal">
+
+                            <!-- Add components in code based on quantity of blood type -->
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/blood_type_list_bottom"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_marginTop="10dp"
+                            android:gravity="center_horizontal">
+
+                            <!-- Add components in code based on quantity of blood type -->
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/blood_type_needed"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/blood_type_list"
+                        android:layout_marginTop="10dp"
+                        android:text="Blood Type Needed"
+                        android:textSize="24sp"
+                        android:layout_centerInParent="true"
+                        android:textStyle="bold"
+                        android:textColor="@color/black"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_below="@+id/blood_type_needed">
+
+                        <RelativeLayout
+                            android:layout_marginTop="10dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="@color/grey" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:drawableStart="@drawable/ic_event"
+                                android:drawableTint="@color/blood_orange"
+                                android:text="Event"
+                                android:layout_marginTop="10dp"
+                                android:layout_alignParentStart="true"
+                                android:drawablePadding="10dp"
+                                android:textSize="20sp"
+                                android:textColor="@color/black"/>
+
+                            <TextView
+                                android:id="@+id/event_name"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Event Name"
+                                android:maxWidth="180dp"
+                                android:textAlignment="textEnd"
+                                android:layout_marginTop="10dp"
+                                android:textSize="20sp"
+                                android:layout_alignParentEnd="true"
+                                android:textColor="@color/black"/>
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_marginTop="10dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="@color/grey" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:drawableStart="@drawable/ic_username"
+                                android:drawableTint="@color/blood_orange"
+                                android:text="Site Manager"
+                                android:layout_marginTop="10dp"
+                                android:layout_alignParentStart="true"
+                                android:drawablePadding="10dp"
+                                android:textSize="20sp"
+                                android:textColor="@color/black"/>
+
+                            <TextView
+
+                                android:id="@+id/site_manager_name"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:maxWidth="180dp"
+                                android:textAlignment="textEnd"
+                                android:text="Site Manager Name"
+                                android:layout_marginTop="10dp"
+                                android:textSize="20sp"
+                                android:layout_alignParentEnd="true"
+                                android:textColor="@color/black"/>
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_marginTop="10dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="@color/grey" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:drawableStart="@drawable/ic_phone"
+                                android:drawableTint="@color/blood_orange"
+                                android:text="Contact"
+                                android:layout_marginTop="10dp"
+                                android:layout_alignParentStart="true"
+                                android:drawablePadding="10dp"
+                                android:textSize="20sp"
+                                android:textColor="@color/black"/>
+
+                            <TextView
+                                android:maxWidth="180dp"
+                                android:textAlignment="textEnd"
+                                android:id="@+id/contact_number"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="9856878587"
+                                android:layout_marginTop="10dp"
+                                android:textSize="20sp"
+                                android:layout_alignParentEnd="true"
+                                android:textColor="@color/black"/>
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_marginTop="10dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="@color/grey" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:drawableStart="@drawable/ic_location"
+                                android:drawableTint="@color/blood_orange"
+                                android:text="Location"
+                                android:layout_marginTop="10dp"
+                                android:layout_alignParentStart="true"
+                                android:drawablePadding="10dp"
+                                android:textSize="20sp"
+                                android:textColor="@color/black"/>
+
+                            <TextView
+                                android:id="@+id/event_location"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:maxWidth="180dp"
+                                android:textAlignment="textEnd"
+                                android:text="AGS Hospital, Moolakulam"
+                                android:singleLine="false"
+                                android:layout_marginTop="10dp"
+                                android:textSize="20sp"
+                                android:layout_alignParentEnd="true"
+                                android:textColor="@color/black"/>
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_marginTop="10dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="@color/grey" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:drawableStart="@drawable/ic_calendar"
+                                android:drawableTint="@color/blood_orange"
+                                android:text="Date Start"
+                                android:layout_marginTop="10dp"
+                                android:layout_alignParentStart="true"
+                                android:drawablePadding="10dp"
+                                android:textSize="20sp"
+                                android:textColor="@color/black"/>
+
+                            <TextView
+                                android:id="@+id/event_date_start"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:maxWidth="180dp"
+                                android:textAlignment="textEnd"
+                                android:text="Dec.21.2024"
+                                android:singleLine="false"
+                                android:layout_marginTop="10dp"
+                                android:textSize="20sp"
+                                android:layout_alignParentEnd="true"
+                                android:textColor="@color/black"/>
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_marginTop="10dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="@color/grey" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:drawableStart="@drawable/ic_bloodfilled"
+                                android:drawableTint="@color/blood_orange"
+                                android:text="Total Blood Amount"
+                                android:layout_marginTop="10dp"
+                                android:layout_alignParentStart="true"
+                                android:drawablePadding="10dp"
+                                android:textSize="20sp"
+                                android:textColor="@color/black"/>
+
+                            <TextView
+                                android:id="@+id/event_blood_amount"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:maxWidth="180dp"
+                                android:textAlignment="textEnd"
+                                android:text="9000 ml"
+                                android:singleLine="false"
+                                android:layout_marginTop="10dp"
+                                android:textSize="20sp"
+                                android:layout_alignParentEnd="true"
+                                android:textColor="@color/black"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="35dp"
+                                android:text="Blood A+"
+                                android:layout_marginTop="10dp"
+                                android:layout_below="@id/event_blood_amount"
+                                android:layout_alignParentStart="true"
+                                android:drawablePadding="10dp"
+                                android:textSize="20sp"
+                                android:textColor="@color/black"/>
+
+                            <TextView
+                                android:id="@+id/blood_a_plus_amount"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:maxWidth="180dp"
+                                android:textAlignment="textEnd"
+                                android:text="9000 ml"
+                                android:singleLine="false"
+                                android:layout_marginTop="10dp"
+                                android:layout_below="@id/event_blood_amount"
+                                android:textSize="20sp"
+                                android:layout_alignParentEnd="true"
+                                android:textColor="@color/black"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="35dp"
+                                android:text="Blood A-"
+                                android:layout_marginTop="10dp"
+                                android:layout_below="@id/blood_a_plus_amount"
+                                android:layout_alignParentStart="true"
+                                android:drawablePadding="10dp"
+                                android:textSize="20sp"
+                                android:textColor="@color/black"/>
+
+                            <TextView
+                                android:id="@+id/blood_a_minus_amount"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:maxWidth="180dp"
+                                android:textAlignment="textEnd"
+                                android:text="9000 ml"
+                                android:singleLine="false"
+                                android:layout_marginTop="10dp"
+                                android:layout_below="@id/blood_a_plus_amount"
+                                android:textSize="20sp"
+                                android:layout_alignParentEnd="true"
+                                android:textColor="@color/black"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="35dp"
+                                android:text="Blood B+"
+                                android:layout_marginTop="10dp"
+                                android:layout_below="@id/blood_a_minus_amount"
+                                android:layout_alignParentStart="true"
+                                android:drawablePadding="10dp"
+                                android:textSize="20sp"
+                                android:textColor="@color/black"/>
+
+                            <TextView
+                                android:id="@+id/blood_b_plus_amount"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:maxWidth="180dp"
+                                android:textAlignment="textEnd"
+                                android:text="9000 ml"
+                                android:singleLine="false"
+                                android:layout_marginTop="10dp"
+                                android:layout_below="@id/blood_a_minus_amount"
+                                android:textSize="20sp"
+                                android:layout_alignParentEnd="true"
+                                android:textColor="@color/black"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="35dp"
+                                android:text="Blood B-"
+                                android:layout_marginTop="10dp"
+                                android:layout_below="@id/blood_b_plus_amount"
+                                android:layout_alignParentStart="true"
+                                android:drawablePadding="10dp"
+                                android:textSize="20sp"
+                                android:textColor="@color/black"/>
+
+                            <TextView
+                                android:id="@+id/blood_b_minus_amount"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:maxWidth="180dp"
+                                android:textAlignment="textEnd"
+                                android:text="9000 ml"
+                                android:singleLine="false"
+                                android:layout_marginTop="10dp"
+                                android:layout_below="@id/blood_b_plus_amount"
+                                android:textSize="20sp"
+                                android:layout_alignParentEnd="true"
+                                android:textColor="@color/black"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="35dp"
+                                android:text="Blood O+"
+                                android:layout_marginTop="10dp"
+                                android:layout_below="@id/blood_b_minus_amount"
+                                android:layout_alignParentStart="true"
+                                android:drawablePadding="10dp"
+                                android:textSize="20sp"
+                                android:textColor="@color/black"/>
+
+                            <TextView
+                                android:id="@+id/blood_o_plus_amount"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:maxWidth="180dp"
+                                android:textAlignment="textEnd"
+                                android:text="9000 ml"
+                                android:singleLine="false"
+                                android:layout_marginTop="10dp"
+                                android:layout_below="@id/blood_b_minus_amount"
+                                android:textSize="20sp"
+                                android:layout_alignParentEnd="true"
+                                android:textColor="@color/black"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="35dp"
+                                android:text="Blood O-"
+                                android:layout_marginTop="10dp"
+                                android:layout_below="@id/blood_o_plus_amount"
+                                android:layout_alignParentStart="true"
+                                android:drawablePadding="10dp"
+                                android:textSize="20sp"
+                                android:textColor="@color/black"/>
+
+                            <TextView
+                                android:id="@+id/blood_o_minus_amount"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/blood_o_plus_amount"
+                                android:layout_alignParentEnd="true"
+                                android:layout_marginTop="10dp"
+                                android:maxWidth="180dp"
+                                android:singleLine="false"
+                                android:text="9000 ml"
+                                android:textAlignment="textEnd"
+                                android:textColor="@color/black"
+                                android:textSize="20sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="35dp"
+                                android:text="Blood AB+"
+                                android:layout_marginTop="10dp"
+                                android:layout_below="@id/blood_o_minus_amount"
+                                android:layout_alignParentStart="true"
+                                android:drawablePadding="10dp"
+                                android:textSize="20sp"
+                                android:textColor="@color/black"/>
+
+                            <TextView
+                                android:id="@+id/blood_ab_plus_amount"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:maxWidth="180dp"
+                                android:textAlignment="textEnd"
+                                android:text="9000 ml"
+                                android:singleLine="false"
+                                android:layout_marginTop="10dp"
+                                android:layout_below="@id/blood_o_minus_amount"
+                                android:textSize="20sp"
+                                android:layout_alignParentEnd="true"
+                                android:textColor="@color/black"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="35dp"
+                                android:text="Blood AB-"
+                                android:layout_marginTop="10dp"
+                                android:layout_below="@id/blood_ab_plus_amount"
+                                android:layout_alignParentStart="true"
+                                android:drawablePadding="10dp"
+                                android:textSize="20sp"
+                                android:textColor="@color/black"/>
+
+                            <TextView
+                                android:id="@+id/blood_ab_minus_amount"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:maxWidth="180dp"
+                                android:textAlignment="textEnd"
+                                android:text="9000 ml"
+                                android:singleLine="false"
+                                android:layout_marginTop="10dp"
+                                android:layout_below="@id/blood_ab_plus_amount"
+                                android:textSize="20sp"
+                                android:layout_alignParentEnd="true"
+                                android:textColor="@color/black"/>
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_marginTop="10dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="@color/grey" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/donors_list_title"
+                                android:drawableStart="@drawable/ic_group"
+                                android:drawableTint="@color/blood_orange"
+                                android:text="Donors List"
+                                android:layout_marginTop="10dp"
+                                android:layout_alignParentStart="true"
+                                android:drawablePadding="10dp"
+                                android:textSize="20sp"
+                                android:textColor="@color/black"/>
+
+                            <LinearLayout
+                                android:id="@+id/donor_info_containers"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/donors_list_title"
+                                android:orientation="vertical">
+
+                                <!-- Add components in code based on list of donors -->
+
+                            </LinearLayout>
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_below="@id/donor_info_containers"
+                                android:background="@color/grey" />
+                        </RelativeLayout>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:text="Event Mission"
+                            android:textStyle="bold"
+                            android:textColor="@color/black"
+                            android:textSize="20sp"/>
+
+                        <TextView
+                            android:id="@+id/event_mission"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:singleLine="false"
+                            android:text="Event misison detail. For example: We want to help more and more people in the world"
+                            android:textColor="@color/black"
+                            android:textSize="18sp"/>
+                    </LinearLayout>
+                </RelativeLayout>
+            </ScrollView>
+        </RelativeLayout>
+    </LinearLayout>
+</RelativeLayout>
