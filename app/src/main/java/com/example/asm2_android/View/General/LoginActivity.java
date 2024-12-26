@@ -3,8 +3,10 @@ package com.example.asm2_android.View.General;
 import android.Manifest;
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.InputType;
@@ -22,6 +24,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.example.asm2_android.Controller.NetworkChangeReceiver;
 import com.example.asm2_android.Model.UserRoleEnum;
 import com.example.asm2_android.R;
 
@@ -37,6 +40,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class LoginActivity extends AppCompatActivity {
+    private NetworkChangeReceiver networkChangeReceiver;
     private static final int PERMISSION_REQUEST_CODE = 100;
     private EditText loginUsername, loginPassword;
     private ImageView passwordVisibility, closeAboutUs, aboutUsButton;
@@ -60,6 +64,9 @@ public class LoginActivity extends AppCompatActivity {
         );
 
         checkAndRequestPermissions();
+        networkChangeReceiver = new NetworkChangeReceiver();
+        IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(networkChangeReceiver, filter);
 
         passwordVisibility = findViewById(R.id.password_visibility);
         signInButton = findViewById(R.id.sign_in_button);
@@ -122,6 +129,11 @@ public class LoginActivity extends AppCompatActivity {
         signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (!networkChangeReceiver.isConnected()) {
+                    Toast.makeText(LoginActivity.this, "No internet connection!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 if (!validateUsername() | !validatePassword()) {
                     return;
                 } else {
@@ -133,6 +145,11 @@ public class LoginActivity extends AppCompatActivity {
         redirectSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (!networkChangeReceiver.isConnected()) {
+                    Toast.makeText(LoginActivity.this, "No internet connection!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
                 finish();
             }
@@ -340,5 +357,11 @@ public class LoginActivity extends AppCompatActivity {
         editor.apply();
         Log.d("Current User", currentUser);
         startActivity(intent);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(networkChangeReceiver);
     }
 }
